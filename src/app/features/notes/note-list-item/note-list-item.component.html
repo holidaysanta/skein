@@ -1,0 +1,17 @@
+<div
+  class="relative flex items-center gap-2 rounded-xl pl-6 pr-4 py-2.5 hover:bg-hover before:absolute before:inset-y-2 before:left-2 before:w-1 before:rounded-full"
+  routerLinkActive="bg-hover before:bg-accent"
+>
+  <a [routerLink]="note().id" class="min-w-0 flex-1">
+    <h3 class="truncate">{{ note().title }}</h3>
+    <p class="truncate text-xs text-muted font-medium">{{ note().text || 'Пустая заметка' }}</p>
+  </a>
+  <button
+    type="button"
+    class="p-2 text-muted hover:text-fg"
+    aria-label="Удалить заметку"
+    (click)="deleted.emit()"
+  >
+    ✕
+  </button>
+</div>

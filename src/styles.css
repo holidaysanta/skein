@@ -1,0 +1,29 @@
+@import 'tailwindcss';
+
+:root {
+  color-scheme: dark;
+  --app: #09090b; /* zinc-950: почти чёрный фон страницы */
+  --app-image: url('/backgrounds/friendly-dark.svg'); /* картинка поверх цвета фона */
+  --panel: #18181b; /* zinc-900: сайдбар на ступеньку светлее */
+  --fg: #e4e4e7; /* zinc-200: основной текст, не чисто белый */
+  --muted: #a1a1aa; /* zinc-400: превью в списке, подписи */
+  --line: #27272a; /* zinc-800: тонкие разделители */
+  --hover: #27272a; /* zinc-800: подсветка строки под курсором и выбранной */
+  --accent: #38bdf8;
+}
+
+@theme inline {
+  --color-app: var(--app);
+  --color-panel: var(--panel);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-hover: var(--hover);
+  --color-accent: var(--accent);
+}
+
+body {
+  background-image: var(--app-image);
+  background-size: cover;
+  background-position: center;
+}

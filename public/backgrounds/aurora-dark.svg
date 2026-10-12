@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0c0d12"/>
+      <stop offset="1" stop-color="#07080b"/>
+    </linearGradient>
+    <linearGradient id="ribbonA" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#29b6f6" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#29b6f6" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#6c5ce7" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="ribbonB" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6c5ce7" stop-opacity="0"/>
+      <stop offset="0.55" stop-color="#6c5ce7" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#1de9b6" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="vignette" cx="0.5" cy="0.5" r="0.78">
+      <stop offset="0.5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.65"/>
+    </radialGradient>
+    <filter id="blur" x="-20%" y="-50%" width="140%" height="200%">
+      <feGaussianBlur stdDeviation="55"/>
+    </filter>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.9 -0.35"/>
+    </filter>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#base)"/>
+
+  <!-- aurora ribbons -->
+  <g filter="url(#blur)">
+    <path d="M-100 820 C 380 560, 760 980, 1180 700 S 1800 380, 2040 520 L 2040 700 C 1800 560, 1400 900, 1180 900 S 380 760, -100 1000 Z" fill="url(#ribbonA)"/>
+    <path d="M-100 360 C 300 160, 700 420, 1100 260 S 1700 40, 2040 180 L 2040 340 C 1700 220, 1300 440, 1100 420 S 300 340, -100 520 Z" fill="url(#ribbonB)"/>
+  </g>
+
+  <!-- topographic lines -->
+  <g fill="none" stroke="#ffffff" stroke-opacity="0.045" stroke-width="1.2">
+    <path d="M-50 700 C 350 520, 760 900, 1180 640 S 1800 360, 1970 440"/>
+    <path d="M-50 740 C 350 560, 760 940, 1180 680 S 1800 400, 1970 480"/>
+    <path d="M-50 780 C 350 600, 760 980, 1180 720 S 1800 440, 1970 520"/>
+    <path d="M-50 820 C 350 640, 760 1020, 1180 760 S 1800 480, 1970 560"/>
+    <path d="M-50 860 C 350 680, 760 1060, 1180 800 S 1800 520, 1970 600"/>
+    <path d="M-50 900 C 350 720, 760 1100, 1180 840 S 1800 560, 1970 640"/>
+  </g>
+
+  <!-- grain -->
+  <rect width="1920" height="1080" filter="url(#grain)" opacity="0.05"/>
+
+  <rect width="1920" height="1080" fill="url(#vignette)"/>
+</svg>

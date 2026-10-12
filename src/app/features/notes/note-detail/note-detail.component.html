@@ -1,0 +1,15 @@
+@if (note(); as n) {
+  @if (isEditing()) {
+    <button type="button" (click)="stopEditing()">Готово</button>
+
+    <div class="grid grid-cols-2 gap-4">
+      <app-note-editor [note]="n" (changed)="updateNote($event)" />
+      <app-note-view [note]="n" />
+    </div>
+  } @else {
+    <button type="button" (click)="startEditing()">Редактировать</button>
+    <app-note-view [note]="n" />
+  }
+} @else {
+  <p>Заметка не найдена</p>
+}
