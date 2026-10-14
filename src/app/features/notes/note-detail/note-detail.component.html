@@ -8,7 +8,9 @@
     </div>
   } @else {
     <button type="button" (click)="startEditing()" class="self-end">Редактировать</button>
-    <app-note-view [note]="n" class="min-h-0 flex-1 overflow-y-auto" />
+    <div class="min-h-0 flex-1 overflow-y-auto">
+      <app-note-view [note]="n" class="mx-auto max-w-3xl" />
+    </div>
   }
 } @else {
   <p>Заметка не найдена</p>

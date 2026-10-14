@@ -2,7 +2,7 @@
   [ngModel]="note().title"
   (ngModelChange)="changed.emit({ title: $event })"
   [maxlength]="titleMaxLength"
-  class="text-2xl font-semibold outline-none"
+  class="note-title outline-none"
 />
 <textarea
   [ngModel]="note().text"
