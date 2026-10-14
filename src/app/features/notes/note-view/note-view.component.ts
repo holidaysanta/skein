@@ -8,6 +8,7 @@ import { MarkdownToHtmlPipe } from '../../../shared/markdown-to-html.pipe';
   templateUrl: './note-view.component.html',
   styleUrl: './note-view.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'flex flex-col gap-4' },
 })
 export class NoteViewComponent {
   readonly note = input.required<Note>();

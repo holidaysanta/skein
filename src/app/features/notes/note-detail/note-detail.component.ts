@@ -17,7 +17,7 @@ import { NoteEditorComponent } from '../note-editor/note-editor.component';
   templateUrl: './note-detail.component.html',
   styleUrl: './note-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'block h-full' },
+  host: { class: 'h-full flex flex-col gap-4' },
 })
 export class NoteDetailComponent {
   private readonly notesStore = inject(NotesStore);

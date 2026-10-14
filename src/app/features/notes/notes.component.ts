@@ -4,6 +4,7 @@ import { NotesStore } from './notes.store';
 import { Router, RouterOutlet } from '@angular/router';
 import { NoteListItemComponent } from './note-list-item/note-list-item.component';
 import { ModalComponent } from '../../shared/modal/modal.component';
+import { NOTE_TITLE_MAX_LENGTH } from './note.model';
 
 @Component({
   selector: 'app-notes',
@@ -16,8 +17,9 @@ export class NotesComponent {
   private readonly router = inject(Router);
   protected readonly notesStore = inject(NotesStore);
 
-  protected readonly isCreateOpen = signal(false);
+  protected readonly titleMaxLength = NOTE_TITLE_MAX_LENGTH;
 
+  protected readonly isCreateOpen = signal(false);
   protected readonly draftTitle = signal('');
 
   protected createNote(): void {

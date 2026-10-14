@@ -1,5 +1,5 @@
-<div class="flex h-dvh gap-4 p-4">
-  <aside class="flex w-80 shrink-0 flex-col overflow-hidden rounded-3xl bg-panel">
+<div class="flex h-dvh gap-2 p-2">
+  <aside class="flex w-75 shrink-0 flex-col overflow-hidden rounded-3xl bg-panel">
     <div class="p-4">
       <button type="button" (click)="openCreate()">Добавить новую заметку</button>
     </div>
@@ -13,7 +13,7 @@
     </nav>
   </aside>
 
-  <main class="min-w-0 flex-1 overflow-y-auto">
+  <main class="min-w-0 flex-1 overflow-y-auto rounded-3xl bg-panel/80 backdrop-blur-xl p-6">
     <router-outlet />
   </main>
 </div>
@@ -21,7 +21,12 @@
 @if (isCreateOpen()) {
   <app-modal (closed)="closeCreate()">
     <form (ngSubmit)="createNote()" class="flex flex-col gap-4">
-      <input name="title" [(ngModel)]="draftTitle" placeholder="Заголовок" />
+      <input
+        name="title"
+        [(ngModel)]="draftTitle"
+        [maxlength]="titleMaxLength"
+        placeholder="Заголовок"
+      />
 
       <div class="flex w-full justify-end gap-4">
         <button type="submit">Создать</button>

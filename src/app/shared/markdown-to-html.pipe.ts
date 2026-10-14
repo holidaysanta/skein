@@ -6,6 +6,6 @@ import { marked } from 'marked';
 })
 export class MarkdownToHtmlPipe implements PipeTransform {
   transform(value: string): string {
-    return marked.parse(value) as string;
+    return marked.parse(value, { breaks: true }) as string;
   }
 }

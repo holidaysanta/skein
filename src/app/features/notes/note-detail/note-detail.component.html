@@ -1,14 +1,14 @@
 @if (note(); as n) {
   @if (isEditing()) {
-    <button type="button" (click)="stopEditing()">Готово</button>
+    <button type="button" (click)="stopEditing()" class="self-end">Готово</button>
 
-    <div class="grid grid-cols-2 gap-4">
-      <app-note-editor [note]="n" (changed)="updateNote($event)" />
-      <app-note-view [note]="n" />
+    <div class="grid min-h-0 flex-1 grid-cols-2 divide-x divide-line">
+      <app-note-editor [note]="n" (changed)="updateNote($event)" class="pr-4" />
+      <app-note-view [note]="n" class="pl-4 overflow-y-auto" />
     </div>
   } @else {
-    <button type="button" (click)="startEditing()">Редактировать</button>
-    <app-note-view [note]="n" />
+    <button type="button" (click)="startEditing()" class="self-end">Редактировать</button>
+    <app-note-view [note]="n" class="min-h-0 flex-1 overflow-y-auto" />
   }
 } @else {
   <p>Заметка не найдена</p>

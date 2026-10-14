@@ -1,4 +1,11 @@
-<div class="flex flex-col">
-  <input [ngModel]="note().title" (ngModelChange)="changed.emit({ title: $event })" />
-  <textarea [ngModel]="note().text" (ngModelChange)="changed.emit({ text: $event })"></textarea>
-</div>
+<input
+  [ngModel]="note().title"
+  (ngModelChange)="changed.emit({ title: $event })"
+  [maxlength]="titleMaxLength"
+  class="text-2xl font-semibold outline-none"
+/>
+<textarea
+  [ngModel]="note().text"
+  (ngModelChange)="changed.emit({ text: $event })"
+  class="flex-1 resize-none outline-none font-mono"
+></textarea>
