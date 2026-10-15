@@ -38,6 +38,7 @@ export class MarkdownEditorComponent {
       this.lastEmitted = this.value();
       this.crepe.on((listener) => {
         listener.markdownUpdated((_ctx, markdown) => {
+          if (markdown !== this.crepe!.getMarkdown()) return;
           this.emitIfChanged(markdown);
         });
         listener.blur(() => this.emitIfChanged(this.crepe!.getMarkdown()));
