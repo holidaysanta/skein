@@ -1,17 +1,7 @@
 @if (note(); as n) {
-  @if (isEditing()) {
-    <button type="button" (click)="stopEditing()" class="self-end">Готово</button>
-
-    <div class="grid min-h-0 flex-1 grid-cols-2 divide-x divide-line">
-      <app-markdown-editor [value]="n.text" class="pr-4" (changed)="updateNote({ text: $event })" />
-      <app-note-view [note]="n" class="pl-4 overflow-y-auto" />
-    </div>
-  } @else {
-    <button type="button" (click)="startEditing()" class="self-end">Редактировать</button>
-    <div class="min-h-0 flex-1 overflow-y-auto">
-      <app-note-view [note]="n" class="mx-auto max-w-3xl" />
-    </div>
-  }
+  <div class="grid min-h-0 flex-1 grid-cols-2 divide-x divide-line">
+    <app-markdown-editor [value]="n.text" class="pr-4" (changed)="updateNote({ text: $event })" />
+  </div>
 } @else {
   <p>Заметка не найдена</p>
 }

@@ -3,13 +3,16 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
+  effect,
   ElementRef,
   inject,
   input,
   output,
+  signal,
   viewChild,
 } from '@angular/core';
 import { Crepe } from '@milkdown/crepe';
+import { replaceAll } from '@milkdown/kit/utils';
 
 @Component({
   selector: 'app-markdown-editor',
@@ -22,16 +25,16 @@ export class MarkdownEditorComponent {
   readonly value = input.required<string>();
   readonly changed = output<string>();
 
+  private readonly isReady = signal(false);
+
   private crepe?: Crepe;
   private lastEmitted = '';
 
   constructor() {
     // afterNextRender выполняется вне зоны Angular, поэтому события Milkdown не запускают проверку изменений
-    afterNextRender(() => {
+    afterNextRender(async () => {
       this.crepe = new Crepe({ root: this.host().nativeElement, defaultValue: this.value() });
-
       this.lastEmitted = this.value();
-
       this.crepe.on((listener) => {
         listener.markdownUpdated((_ctx, markdown) => {
           this.emitIfChanged(markdown);
@@ -39,7 +42,16 @@ export class MarkdownEditorComponent {
         listener.blur(() => this.emitIfChanged(this.crepe!.getMarkdown()));
       });
 
-      this.crepe.create();
+      await this.crepe.create();
+      this.isReady.set(true);
+    });
+
+    effect(() => {
+      const value = this.value();
+      if (!this.isReady() || value === this.lastEmitted) return;
+
+      this.lastEmitted = value;
+      this.crepe!.editor.action(replaceAll(value, true));
     });
 
     inject(DestroyRef).onDestroy(() => this.crepe?.destroy());

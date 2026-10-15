@@ -14,7 +14,7 @@ import { MarkdownEditorComponent } from '../../../shared/markdown-editor/markdow
 
 @Component({
   selector: 'app-note-detail',
-  imports: [NoteViewComponent, MarkdownEditorComponent],
+  imports: [MarkdownEditorComponent],
   templateUrl: './note-detail.component.html',
   styleUrl: './note-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,22 +25,9 @@ export class NoteDetailComponent {
 
   readonly id = input.required<string>();
 
-  protected readonly isEditing = linkedSignal({
-    source: this.id,
-    computation: () => false,
-  });
-
   protected readonly note = computed(() => this.notesStore.notes().find((n) => n.id === this.id()));
 
   protected updateNote(changes: Partial<Note>): void {
     this.notesStore.updateNote(this.id(), changes);
-  }
-
-  protected startEditing(): void {
-    this.isEditing.set(true);
-  }
-
-  protected stopEditing(): void {
-    this.isEditing.set(false);
   }
 }

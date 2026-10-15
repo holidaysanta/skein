@@ -18,6 +18,7 @@
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
     "@milkdown/crepe": "^7.22.3",
+    "@milkdown/kit": "^7.22.3",
     "@tailwindcss/postcss": "^4.3.3",
     "marked": "^18.1.0",
     "postcss": "^8.5.29",
