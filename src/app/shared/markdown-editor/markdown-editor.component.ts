@@ -18,6 +18,7 @@ import { replaceAll } from '@milkdown/kit/utils';
   selector: 'app-markdown-editor',
   templateUrl: './markdown-editor.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'flex flex-col' },
 })
 export class MarkdownEditorComponent {
   private readonly host = viewChild.required<ElementRef<HTMLDivElement>>('host');

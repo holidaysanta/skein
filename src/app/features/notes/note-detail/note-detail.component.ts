@@ -1,29 +1,23 @@
+import { FormsModule } from '@angular/forms';
 import { NotesStore } from '../notes.store';
-import {
-  Component,
-  computed,
-  inject,
-  input,
-  ChangeDetectionStrategy,
-  linkedSignal,
-} from '@angular/core';
-import { Note } from '../note.model';
-import { NoteViewComponent } from '../note-view/note-view.component';
-import { NoteEditorComponent } from '../note-editor/note-editor.component';
+import { Component, computed, inject, input, ChangeDetectionStrategy } from '@angular/core';
+import { Note, NOTE_TITLE_MAX_LENGTH } from '../note.model';
 import { MarkdownEditorComponent } from '../../../shared/markdown-editor/markdown-editor.component';
 
 @Component({
   selector: 'app-note-detail',
-  imports: [MarkdownEditorComponent],
+  imports: [FormsModule, MarkdownEditorComponent],
   templateUrl: './note-detail.component.html',
   styleUrl: './note-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'h-full flex flex-col gap-4' },
+  host: { class: 'min-h-full flex flex-col gap-4' },
 })
 export class NoteDetailComponent {
   private readonly notesStore = inject(NotesStore);
 
   readonly id = input.required<string>();
+
+  protected readonly titleMaxLength = NOTE_TITLE_MAX_LENGTH;
 
   protected readonly note = computed(() => this.notesStore.notes().find((n) => n.id === this.id()));
 
