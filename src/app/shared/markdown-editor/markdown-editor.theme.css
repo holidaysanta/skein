@@ -1,0 +1,24 @@
+app-markdown-editor .milkdown {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  --crepe-color-background: transparent;
+}
+
+app-markdown-editor .milkdown .editor {
+  flex: 1;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 5.5rem;
+}
+
+.milkdown {
+  --milkdown-color-primary: var(--accent);
+  --milkdown-color-background: transparent;
+  --milkdown-color-surface: var(--panel);
+  --milkdown-color-border: var(--line);
+
+  color: var(--fg);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}

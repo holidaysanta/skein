@@ -1,19 +1,29 @@
 @import 'tailwindcss';
 @import '@milkdown/crepe/theme/common/style.css';
 @import '@milkdown/crepe/theme/frame-dark.css';
+@import './app/shared/markdown-editor/markdown-editor.theme.css';
 
 :root {
   color-scheme: dark;
   --app: #151515;
   --panel: #111111;
-  --fg: #e4e4e7;
-  --muted: #a1a1aa;
-  --line: #27272a;
-  --hover: #27272a;
+  --muted: #898781;
+  --line: #292929;
+  --hover: #343434;
+  --accent: #c1c0b6;
+}
+
+:root[data-theme='blue'] {
+  --app: #23272e;
+  --panel: #1e2227;
+  --fg: #f1f5f9;
+  --muted: #94a3b8;
+  --line: #262930;
+  --hover: #2d3139;
   --accent: #38bdf8;
 }
 
-@theme inline {
+@theme {
   --color-app: var(--app);
   --color-panel: var(--panel);
   --color-fg: var(--fg);
@@ -26,14 +36,4 @@
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--line) transparent;
-}
-
-app-markdown-editor .milkdown {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-app-markdown-editor .milkdown .ProseMirror {
-  flex: 1;
 }
