@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-note-empty',
-  imports: [],
   template: ` <p>Выберите заметку слева</p> `,
-  styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'h-full flex items-center justify-center text-muted' },
 })
 export class NoteEmptyComponent {}

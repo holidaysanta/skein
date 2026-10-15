@@ -10,10 +10,11 @@ import {
 import { Note } from '../note.model';
 import { NoteViewComponent } from '../note-view/note-view.component';
 import { NoteEditorComponent } from '../note-editor/note-editor.component';
+import { MarkdownEditorComponent } from '../../../shared/markdown-editor/markdown-editor.component';
 
 @Component({
   selector: 'app-note-detail',
-  imports: [NoteViewComponent, NoteEditorComponent],
+  imports: [NoteViewComponent, MarkdownEditorComponent],
   templateUrl: './note-detail.component.html',
   styleUrl: './note-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
