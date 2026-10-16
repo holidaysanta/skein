@@ -7,6 +7,7 @@
   color-scheme: dark;
   --app: #151515;
   --panel: #111111;
+  --fg: #f1f5f9;
   --muted: #898781;
   --line: #292929;
   --hover: #343434;
@@ -16,14 +17,13 @@
 :root[data-theme='blue'] {
   --app: #23272e;
   --panel: #1e2227;
-  --fg: #f1f5f9;
   --muted: #94a3b8;
   --line: #262930;
   --hover: #2d3139;
   --accent: #38bdf8;
 }
 
-@theme {
+@theme inline {
   --color-app: var(--app);
   --color-panel: var(--panel);
   --color-fg: var(--fg);

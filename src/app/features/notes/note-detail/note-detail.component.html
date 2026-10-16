@@ -1,6 +1,6 @@
 @if (note(); as n) {
   <input
-    class="pl-[5.5rem] py-2 text-3xl leading-normal font-bold outline-none"
+    class="py-3 text-3xl leading-normal font-bold outline-none"
     [ngModel]="n.title"
     (ngModelChange)="updateNote({ title: $event })"
     [maxlength]="titleMaxLength"

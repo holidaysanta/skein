@@ -10,7 +10,7 @@ import { MarkdownEditorComponent } from '../../../shared/markdown-editor/markdow
   templateUrl: './note-detail.component.html',
   styleUrl: './note-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'mx-auto min-h-full min-w-0 max-w-5xl flex flex-col' },
+  host: { class: 'mx-auto px-22 min-h-full max-w-5xl flex flex-col' },
 })
 export class NoteDetailComponent {
   private readonly notesStore = inject(NotesStore);

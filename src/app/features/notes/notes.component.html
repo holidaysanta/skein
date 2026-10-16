@@ -1,6 +1,6 @@
 <div class="flex h-dvh">
   <aside
-    class="flex mx-2 my-4 rounded-xl w-75 shrink-0 flex-col border border-line overflow-hidden bg-panel"
+    class="flex m-3 rounded-xl w-75 shrink-0 flex-col border border-line overflow-hidden bg-panel"
   >
     <div class="p-4">
       <button type="button" (click)="openCreate()">Добавить новую заметку</button>
@@ -15,7 +15,7 @@
     </nav>
   </aside>
 
-  <main class="w-full overflow-y-auto">
+  <main class="min-w-0 flex-1 overflow-y-auto">
     <router-outlet />
   </main>
 </div>
