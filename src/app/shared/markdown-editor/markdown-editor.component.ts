@@ -34,8 +34,19 @@ export class MarkdownEditorComponent {
   constructor() {
     // afterNextRender выполняется вне зоны Angular, поэтому события Milkdown не запускают проверку изменений
     afterNextRender(async () => {
-      this.crepe = new Crepe({ root: this.host().nativeElement, defaultValue: this.value() });
+      this.crepe = new Crepe({
+        root: this.host().nativeElement,
+        defaultValue: this.value(),
+        featureConfigs: {
+          [Crepe.Feature.Placeholder]: {
+            text: 'Начните писать…',
+            mode: 'block',
+          },
+        },
+      });
+
       this.lastEmitted = this.value();
+
       this.crepe.on((listener) => {
         listener.markdownUpdated((_ctx, markdown) => {
           if (markdown !== this.crepe!.getMarkdown()) return;
