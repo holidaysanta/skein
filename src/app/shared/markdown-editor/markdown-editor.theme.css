@@ -4,9 +4,41 @@ app-markdown-editor .milkdown {
   flex: 1;
 
   --crepe-color-background: transparent;
+  --crepe-font-title: inherit;
+  --crepe-font-default: inherit;
 }
 
 app-markdown-editor .milkdown .editor {
   flex: 1;
-  padding: 2rem 0;
+  padding: 0.5rem 0 2rem 0;
+}
+
+/* Первый блок не отталкивается от названия заметки.
+   Не :first-child: Crepe вставляет первым ребёнком служебный div.prosemirror-virtual-cursor */
+app-markdown-editor .milkdown .editor > :nth-child(1 of :not(.prosemirror-virtual-cursor)) {
+  margin-top: 0;
+}
+
+app-markdown-editor .milkdown .editor :is(h1, h2, h3, h4, h5, h6) {
+  font-weight: 600;
+  line-height: 1.3;
+}
+app-markdown-editor .milkdown .editor h1 {
+  font-size: 1.875rem;
+}
+app-markdown-editor .milkdown .editor h2 {
+  font-size: 1.5rem;
+}
+app-markdown-editor .milkdown .editor h3 {
+  font-size: 1.25rem;
+}
+app-markdown-editor .milkdown .editor h4 {
+  font-size: 1.125rem;
+}
+app-markdown-editor .milkdown .editor h5 {
+  font-size: 1rem;
+}
+app-markdown-editor .milkdown .editor h6 {
+  font-size: 0.875rem;
+  color: var(--muted);
 }
