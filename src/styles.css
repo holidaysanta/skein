@@ -1,41 +1,8 @@
 @import 'tailwindcss';
+@import './themes.css';
 @import '@milkdown/crepe/theme/common/style.css';
 @import '@milkdown/crepe/theme/frame-dark.css';
 @import './app/shared/markdown-editor/markdown-editor.theme.css';
-
-:root {
-  color-scheme: dark;
-  --app: #141416;
-  --panel: #1d1d20;
-  --fg: #f1f5f9;
-  --muted: #8a8d93;
-  --line: #2b2c31;
-  --hover: #373940;
-  --accent: #a78bfa;
-  --code: #e9d5ff;
-}
-
-:root[data-theme='blue'] {
-  --app: #0f1115;
-  --panel: #161920;
-  --fg: #e2e8f0;
-  --muted: #626e82;
-  --line: #222733;
-  --hover: #2c3242;
-  --accent: #00b4d8;
-  --code: #e5c07b;
-}
-
-:root[data-theme='mocha'] {
-  --app: #11121d;
-  --panel: #1e2030;
-  --fg: #cad3f5;
-  --muted: #939ab7;
-  --line: #2a2e46;
-  --hover: #494d64;
-  --accent: #8aadf4;
-  --code: #f5bde6;
-}
 
 @theme inline {
   --color-app: var(--app);
