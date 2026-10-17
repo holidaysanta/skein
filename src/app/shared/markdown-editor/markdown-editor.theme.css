@@ -3,14 +3,41 @@ app-markdown-editor .milkdown {
   flex-direction: column;
   flex: 1;
 
-  --crepe-color-background: transparent;
+  /* Фон и текст */
+  --crepe-color-background: transparent; /* редактор без своего фона */
+  --crepe-color-on-background: var(--fg); /* основной текст */
+  --crepe-color-surface: var(--panel); /* фон меню, тулбара, блоков кода */
+  --crepe-color-on-surface: var(--fg); /* текст в меню и тулбаре */
+  --crepe-color-on-surface-variant: var(--muted); /* вторичный текст */
+
+  /* Акцент и состояния */
+  --crepe-color-primary: var(--accent); /* ссылки, активные элементы */
+  --crepe-color-hover: var(--hover); /* наведение на пункты меню */
+  --crepe-color-selected: color-mix(in srgb, var(--accent) 25%, transparent); /* выделение */
+
+  /* Иконки и контуры: Crepe красит ими иконки и чекбоксы, рамки таблиц делает из него с прозрачностью */
+  --crepe-color-outline: var(--muted);
+
+  /* Инлайн-код */
+  --crepe-color-inline-code: var(--code);
+  --crepe-color-inline-area: var(--hover); /* фон плашки (Crepe добавляет 40% прозрачности) */
+
+  /* Шрифты */
   --crepe-font-title: inherit;
   --crepe-font-default: inherit;
+  --crepe-font-code: ui-monospace, 'Cascadia Code', Consolas, monospace;
 }
 
 app-markdown-editor .milkdown .editor {
   flex: 1;
   padding: 0.5rem 0 2rem 0;
+}
+
+/* Ссылки: тонкая полупрозрачная линия с отступом вместо стандартного подчёркивания */
+app-markdown-editor .milkdown .editor a {
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 50%, transparent);
 }
 
 /* Первый блок не отталкивается от названия заметки.
