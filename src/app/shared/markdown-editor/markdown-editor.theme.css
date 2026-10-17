@@ -35,8 +35,8 @@ app-markdown-editor .milkdown .editor {
 
 /* Ссылки: тонкая полупрозрачная линия с отступом вместо стандартного подчёркивания */
 app-markdown-editor .milkdown .editor a {
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
   text-decoration-color: color-mix(in srgb, var(--accent) 50%, transparent);
 }
 

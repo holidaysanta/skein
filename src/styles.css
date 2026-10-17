@@ -16,13 +16,25 @@
 }
 
 :root[data-theme='blue'] {
-  --app: #23272e;
-  --panel: #1e2227;
-  --muted: #94a3b8;
-  --line: #262930;
-  --hover: #2d3139;
-  --accent: #38bdf8;
-  --code: #e06c75;
+  --app: #0f1115;
+  --panel: #161920;
+  --fg: #e2e8f0;
+  --muted: #626e82;
+  --line: #222733;
+  --hover: #2c3242;
+  --accent: #00b4d8;
+  --code: #e5c07b;
+}
+
+:root[data-theme='mocha'] {
+  --app: #11121d;
+  --panel: #1e2030;
+  --fg: #cad3f5;
+  --muted: #939ab7;
+  --line: #2a2e46;
+  --hover: #494d64;
+  --accent: #8aadf4;
+  --code: #f5bde6;
 }
 
 @theme inline {
