@@ -1,5 +1,5 @@
-/* :root без атрибута — запасной вариант, пока Angular не поставил data-theme */
 /* Graphite (по умолчанию): нейтральный серый, фиолетовый акцент */
+/* :root без атрибута — запасной вариант, пока Angular не поставил data-theme */
 :root,
 :root[data-theme='graphite'] {
   color-scheme: dark;
