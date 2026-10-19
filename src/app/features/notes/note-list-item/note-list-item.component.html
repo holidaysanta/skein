@@ -4,7 +4,9 @@
 >
   <a [routerLink]="note().id" class="min-w-0 flex-1">
     <h3 class="truncate">{{ note().title }}</h3>
-    <p class="truncate text-xs text-muted font-medium">{{ note().text || 'Пустая заметка' }}</p>
+    <p class="truncate text-xs text-muted font-medium">
+      {{ (note().text | markdownToPlain) || 'Пустая заметка' }}
+    </p>
   </a>
   <button
     type="button"
