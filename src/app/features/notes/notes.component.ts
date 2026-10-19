@@ -5,10 +5,11 @@ import { Router, RouterOutlet } from '@angular/router';
 import { NoteListItemComponent } from './note-list-item/note-list-item.component';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { NOTE_TITLE_MAX_LENGTH } from './note.model';
+import { ThemePickerComponent } from '../../shared/theme-picker/theme-picker.component';
 
 @Component({
   selector: 'app-notes',
-  imports: [FormsModule, RouterOutlet, NoteListItemComponent, ModalComponent],
+  imports: [FormsModule, RouterOutlet, NoteListItemComponent, ModalComponent, ThemePickerComponent],
   templateUrl: './notes.component.html',
   styleUrl: './notes.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

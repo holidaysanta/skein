@@ -1,0 +1,10 @@
+@for (theme of themes; track theme) {
+  <button
+    class="w-8 h-8 bg-accent rounded-full cursor-pointer ring-offset-2 ring-offset-panel focus-visible:ring-2"
+    [class.ring-2]="theme === themeStore.theme()"
+    (click)="themeStore.setTheme(theme)"
+    [title]="theme"
+    [ariaLabel]="theme"
+    [attr.data-theme]="theme"
+  ></button>
+}

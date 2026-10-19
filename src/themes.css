@@ -1,7 +1,7 @@
 /* Graphite (по умолчанию): нейтральный серый, фиолетовый акцент */
 /* :root без атрибута — запасной вариант, пока Angular не поставил data-theme */
-:root,
-:root[data-theme='graphite'] {
+:where(:root),
+[data-theme='graphite'] {
   color-scheme: dark;
   --app: #141416;
   --panel: #1d1d20;
@@ -14,7 +14,7 @@
 }
 
 /* Midnight: холодный синеватый фон, циановый акцент, жёлтый код (в духе One Dark) */
-:root[data-theme='midnight'] {
+[data-theme='midnight'] {
   --app: #0f1115;
   --panel: #161920;
   --fg: #e2e8f0;
@@ -26,7 +26,7 @@
 }
 
 /* Macchiato: индиговый фон, текст и акценты из палитры Catppuccin Macchiato */
-:root[data-theme='macchiato'] {
+[data-theme='macchiato'] {
   --app: #11121d;
   --panel: #1e2030;
   --fg: #cad3f5;
