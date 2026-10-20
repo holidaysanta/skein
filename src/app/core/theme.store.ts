@@ -4,7 +4,7 @@ import { DOCUMENT } from '@angular/common';
 export const THEMES = ['graphite', 'midnight', 'macchiato'] as const;
 export type Theme = (typeof THEMES)[number];
 
-const STORAGE_KEY = 'burmaldense.theme';
+const STORAGE_KEY = 'skein.theme';
 const DEFAULT_THEME = 'graphite';
 
 function isTheme(value: string | null): value is Theme {

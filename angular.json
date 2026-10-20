@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Burmaldense": {
+    "Skein": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/burmaldense",
+            "outputPath": "dist/skein",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Burmaldense:build:production"
+              "buildTarget": "Skein:build:production"
             },
             "development": {
-              "buildTarget": "Burmaldense:build:development"
+              "buildTarget": "Skein:build:development"
             }
           },
           "defaultConfiguration": "development"

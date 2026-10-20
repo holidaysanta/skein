@@ -1,7 +1,7 @@
 import { Injectable, signal, effect } from '@angular/core';
 import { Note } from './note.model';
 
-const STORAGE_KEY = 'burmaldense.notes';
+const STORAGE_KEY = 'skein.notes';
 
 function loadNotes(): Note[] {
   const raw = localStorage.getItem(STORAGE_KEY);
