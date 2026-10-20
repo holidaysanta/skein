@@ -1,59 +1,57 @@
 # Skein
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+Заметки в markdown, которые можно быстро закинуть и разложить потом.
 
-## Development server
+> Проект в разработке. Следующая большая фича — **пространства**: контексты, которые пользователь создаёт сам (имя, иконка, цвет). Одна заметка хранится в одном экземпляре, но может принадлежать нескольким пространствам.
 
-To start a local development server, run:
+## Что уже есть
+
+- **Редактор markdown без режимов** — пишешь сразу в оформленном виде, без переключения «редактировать / просмотр». Таблицы, списки задач, блоки кода.
+- **Автосохранение** — заметки сохраняются по ходу набора, без кнопки «Сохранить».
+- **Список заметок с превью** — первая строка текста без markdown-разметки.
+- **Три цветовые темы** с переключателем; выбор запоминается.
+
+Данные пока хранятся в `localStorage` браузера.
+
+## Стек
+
+Angular 19 (standalone, signals, OnPush) · TypeScript · Tailwind CSS 4 · [Milkdown Crepe](https://milkdown.dev) · mdast
+
+## Технические решения
+
+### Состояние на сигналах
+
+Сторы — сервисы с приватным `signal` и публичным `asReadonly()`: компоненты читают состояние, но меняют его только через методы стора. Сохранение в `localStorage` вынесено в `effect`, поэтому методы стора не знают о хранилище. Все обновления иммутабельные — это нужно и для `OnPush`, и для чистых пайпов.
+
+### Обёртка над сторонним редактором
+
+Milkdown ничего не знает об Angular, поэтому компонент-обёртка служит мостом между ними:
+
+- редактор создаётся в `afterNextRender` — DOM уже готов, код выполняется только в браузере и вне зоны Angular, так что набор текста не запускает проверку изменений на каждую клавишу;
+- входящее значение синхронизируется через `effect`, а последний отправленный текст запоминается, чтобы редактор не получал обратно собственные изменения (иначе курсор прыгает в начало);
+- Milkdown сообщает об изменениях с задержкой 200 мс. Чтобы не терять последние символы при уходе со страницы, текст досылается на `blur` (в `onDestroy` `output()` уже недоступен);
+- запоздалое событие от предыдущей заметки отбрасывается: иначе текст одной заметки мог сохраниться в другую.
+
+### Превью через парсер, а не регулярки
+
+Первая версия чистила markdown регулярными выражениями, и каждый новый случай требовал нового правила: экранирование, HTML-сущности, `<br />` от пустых строк, чекбоксы, таблицы. Сейчас текст разбирается в синтаксическое дерево (mdast), а текст собирается рекурсивным обходом: внутри абзаца — как есть, между блоками, ячейками таблиц и пунктами списков — через пробел. Парсер уже входит в сборку как зависимость Milkdown, поэтому размер бандла почти не вырос.
+
+### Темы на CSS-переменных
+
+Каждая тема — набор CSS-переменных под `[data-theme='…']`, связанных с Tailwind через `@theme inline`. Тема по умолчанию объявлена через `:where(:root)` с нулевой специфичностью, поэтому порядок блоков в файле не влияет на результат. Кружки в переключателе получают собственный `data-theme` и сами окрашиваются в акцент своей темы — цвета заданы только в CSS. Сохранённое в `localStorage` значение проверяется предикатом типа: устаревшее или неизвестное имя темы не попадёт в приложение.
+
+## Планы
+
+- [ ] Пространства — контексты для заметок
+- [ ] Тесты
+- [ ] Бэкенд и вход по аккаунту
+- [ ] Деплой
+
+## Запуск
 
 ```bash
-ng serve
+npm install
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Приложение откроется на `http://localhost:4200`.
