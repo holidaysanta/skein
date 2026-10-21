@@ -8,11 +8,11 @@ describe('MarkdownEditorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MarkdownEditorComponent]
-    })
-    .compileComponents();
+      imports: [MarkdownEditorComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MarkdownEditorComponent);
+    fixture.componentRef.setInput('value', '');
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
