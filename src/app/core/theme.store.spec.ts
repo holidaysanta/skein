@@ -1,11 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { ThemeStore } from './theme.store';
 
+function resetThemeState(): void {
+  localStorage.clear();
+  delete document.documentElement.dataset['theme'];
+}
+
 describe('ThemeStore', () => {
-  beforeEach(() => {
-    localStorage.clear();
-    delete document.documentElement.dataset['theme'];
-  });
+  beforeEach(resetThemeState);
+  afterEach(resetThemeState);
 
   it('откатывается на graphite, если сохранена неизвестная тема', () => {
     localStorage.setItem('skein.theme', 'stupidity');

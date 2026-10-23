@@ -13,6 +13,7 @@ describe('NoteDetailComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(NoteDetailComponent);
+    fixture.componentRef.setInput('id', '1');
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
