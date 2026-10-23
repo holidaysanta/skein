@@ -41,8 +41,12 @@ app-markdown-editor .milkdown .editor a {
 }
 
 /* Первый блок не отталкивается от названия заметки.
-   Не :first-child: Crepe вставляет первым ребёнком служебный div.prosemirror-virtual-cursor */
-app-markdown-editor .milkdown .editor > :nth-child(1 of :not(.prosemirror-virtual-cursor)) {
+   Не :first-child: Crepe вставляет первым ребёнком служебный элемент —
+   до первого клика div.ProseMirror-widget, после клика div.prosemirror-virtual-cursor */
+app-markdown-editor
+  .milkdown
+  .editor
+  > :nth-child(1 of :not(.ProseMirror-widget, .prosemirror-virtual-cursor)) {
   margin-top: 0;
 }
 
