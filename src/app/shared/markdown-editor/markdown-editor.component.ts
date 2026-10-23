@@ -76,4 +76,9 @@ export class MarkdownEditorComponent {
     this.lastEmitted = markdown;
     this.changed.emit(markdown);
   }
+
+  flush(): void {
+    if (!this.isReady()) return;
+    this.emitIfChanged(this.crepe!.getMarkdown());
+  }
 }
