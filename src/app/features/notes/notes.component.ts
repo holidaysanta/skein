@@ -1,11 +1,20 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NotesStore } from './notes.store';
-import { Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { NoteListItemComponent } from './note-list-item/note-list-item.component';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { NOTE_TITLE_MAX_LENGTH } from './note.model';
 import { ThemePickerComponent } from '../../shared/theme-picker/theme-picker.component';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-notes',
@@ -18,10 +27,21 @@ export class NotesComponent {
   private readonly router = inject(Router);
   protected readonly notesStore = inject(NotesStore);
 
-  protected readonly titleMaxLength = NOTE_TITLE_MAX_LENGTH;
+  private readonly scrollContainer = viewChild.required<ElementRef<HTMLElement>>('scrollContainer');
 
+  protected readonly titleMaxLength = NOTE_TITLE_MAX_LENGTH;
   protected readonly isCreateOpen = signal(false);
   protected readonly draftTitle = signal('');
+
+  constructor() {
+    // Прокручивается <main>, а не окно, поэтому встроенный сброс прокрутки роутера сюда не дотягивается
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        takeUntilDestroyed()
+      )
+      .subscribe(() => (this.scrollContainer().nativeElement.scrollTop = 0));
+  }
 
   protected createNote(): void {
     const title = this.draftTitle().trim();
