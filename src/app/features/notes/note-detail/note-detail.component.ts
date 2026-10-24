@@ -13,6 +13,7 @@ import { MarkdownEditorComponent } from '../../../shared/markdown-editor/markdow
 import { NavigationStart, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { LibraryFacade } from '../../../data/library.facade';
 
 @Component({
   selector: 'app-note-detail',
@@ -24,7 +25,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class NoteDetailComponent {
   private readonly router = inject(Router);
+
+  // Читаем из стора, меняем через фасад
   private readonly notesStore = inject(NotesStore);
+  private readonly library = inject(LibraryFacade);
 
   readonly id = input.required<string>();
 
@@ -46,6 +50,6 @@ export class NoteDetailComponent {
   }
 
   protected updateNote(changes: Partial<Note>): void {
-    this.notesStore.updateNote(this.id(), changes);
+    this.library.updateNote(this.id(), changes);
   }
 }

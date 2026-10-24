@@ -8,13 +8,14 @@ import {
   viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NotesStore } from '../../data/notes.store';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { NoteListItemComponent } from './note-list-item/note-list-item.component';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { NOTE_TITLE_MAX_LENGTH } from '../../data/note.model';
 import { ThemePickerComponent } from '../../shared/theme-picker/theme-picker.component';
 import { filter } from 'rxjs';
+import { LibraryFacade } from '../../data/library.facade';
+import { NotesStore } from '../../data/notes.store';
 
 @Component({
   selector: 'app-notes',
@@ -25,7 +26,10 @@ import { filter } from 'rxjs';
 })
 export class NotesComponent {
   private readonly router = inject(Router);
+
+  // Читаем из стора, меняем через фасад
   protected readonly notesStore = inject(NotesStore);
+  private readonly library = inject(LibraryFacade);
 
   private readonly scrollContainer = viewChild.required<ElementRef<HTMLElement>>('scrollContainer');
 
@@ -47,13 +51,7 @@ export class NotesComponent {
     const title = this.draftTitle().trim();
     if (!title) return;
 
-    const id = crypto.randomUUID();
-
-    this.notesStore.addNote({
-      id,
-      title,
-      text: '',
-    });
+    const id = this.library.createNote(title);
 
     this.closeCreate();
 
@@ -63,7 +61,7 @@ export class NotesComponent {
   protected deleteNote(id: string): void {
     const isOpen = this.router.url === `/notes/${id}`;
 
-    this.notesStore.deleteNote(id);
+    this.library.deleteNote(id);
 
     if (isOpen) {
       this.router.navigate(['/notes']);
