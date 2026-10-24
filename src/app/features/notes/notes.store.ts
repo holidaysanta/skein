@@ -1,23 +1,23 @@
 import { Injectable, signal, effect } from '@angular/core';
 import { Note } from './note.model';
+import { loadList } from '../../core/storage';
 
 const STORAGE_KEY = 'skein.notes';
 
-function loadNotes(): Note[] {
-  const raw = localStorage.getItem(STORAGE_KEY);
-  if (!raw) return [];
+function isNote(value: unknown): value is Note {
+  if (typeof value !== 'object' || value === null) return false;
 
-  try {
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (error) {
-    return [];
-  }
+  const note = value as Record<string, unknown>;
+  return (
+    typeof note['id'] === 'string' &&
+    typeof note['title'] === 'string' &&
+    typeof note['text'] === 'string'
+  );
 }
 
 @Injectable({ providedIn: 'root' })
 export class NotesStore {
-  private readonly _notes = signal<Note[]>(loadNotes());
+  private readonly _notes = signal(loadList(STORAGE_KEY, isNote));
 
   readonly notes = this._notes.asReadonly();
 

@@ -1,6 +1,6 @@
 import { effect, Injectable, signal } from '@angular/core';
 import { NoteSpaceLink, Space, SPACE_COLORS } from './space.model';
-import { filter } from 'rxjs';
+import { loadList } from '../../core/storage';
 
 const SPACES_KEY = 'skein.spaces';
 const LINKS_KEY = 'skein.links';
@@ -23,18 +23,6 @@ function isNoteSpaceLink(value: unknown): value is NoteSpaceLink {
 
   const link = value as Record<string, unknown>;
   return typeof link['noteId'] === 'string' && typeof link['spaceId'] === 'string';
-}
-
-function loadList<T>(key: string, isItem: (value: unknown) => value is T): T[] {
-  const raw = localStorage.getItem(key);
-  if (!raw) return [];
-
-  try {
-    const parsed: unknown = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed.filter(isItem) : [];
-  } catch (error) {
-    return [];
-  }
 }
 
 @Injectable({ providedIn: 'root' })
