@@ -1,6 +1,6 @@
 import { Injectable, signal, effect } from '@angular/core';
 import { Note } from './note.model';
-import { loadList } from '../../core/storage';
+import { loadList } from '../core/storage';
 
 const STORAGE_KEY = 'skein.notes';
 

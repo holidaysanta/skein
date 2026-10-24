@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { Note } from '../note.model';
+import { Note } from '../../../data/note.model';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MarkdownToPlainPipe } from '../../../shared/markdown-to-plain/markdown-to-plain.pipe';
 

@@ -8,11 +8,11 @@ import {
   viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NotesStore } from './notes.store';
+import { NotesStore } from '../../data/notes.store';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { NoteListItemComponent } from './note-list-item/note-list-item.component';
 import { ModalComponent } from '../../shared/modal/modal.component';
-import { NOTE_TITLE_MAX_LENGTH } from './note.model';
+import { NOTE_TITLE_MAX_LENGTH } from '../../data/note.model';
 import { ThemePickerComponent } from '../../shared/theme-picker/theme-picker.component';
 import { filter } from 'rxjs';
 

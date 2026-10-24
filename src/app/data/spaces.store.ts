@@ -1,6 +1,6 @@
 import { effect, Injectable, signal } from '@angular/core';
 import { NoteSpaceLink, Space, SPACE_COLORS } from './space.model';
-import { loadList } from '../../core/storage';
+import { loadList } from '../core/storage';
 
 const SPACES_KEY = 'skein.spaces';
 const LINKS_KEY = 'skein.links';

@@ -1,5 +1,5 @@
 import { FormsModule } from '@angular/forms';
-import { NotesStore } from '../notes.store';
+import { NotesStore } from '../../../data/notes.store';
 import {
   Component,
   computed,
@@ -8,7 +8,7 @@ import {
   ChangeDetectionStrategy,
   viewChild,
 } from '@angular/core';
-import { Note, NOTE_TITLE_MAX_LENGTH } from '../note.model';
+import { Note, NOTE_TITLE_MAX_LENGTH } from '../../../data/note.model';
 import { MarkdownEditorComponent } from '../../../shared/markdown-editor/markdown-editor.component';
 import { NavigationStart, Router } from '@angular/router';
 import { filter } from 'rxjs';
