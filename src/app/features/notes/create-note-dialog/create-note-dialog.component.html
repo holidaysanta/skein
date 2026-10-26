@@ -1,0 +1,15 @@
+<form (ngSubmit)="submit()" class="flex flex-col gap-4">
+  <h2>Новая заметка</h2>
+
+  <input
+    name="title"
+    [(ngModel)]="draftTitle"
+    [maxlength]="titleMaxLength"
+    placeholder="Заголовок"
+  />
+
+  <div class="flex w-full justify-end gap-4">
+    <button type="submit">Создать</button>
+    <button type="button" (click)="cancel()">Отмена</button>
+  </div>
+</form>

@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import './themes.css';
+@import '@angular/cdk/overlay-prebuilt.css';
 @import '@milkdown/crepe/theme/common/style.css';
 @import '@milkdown/crepe/theme/frame-dark.css';
 @import './app/shared/markdown-editor/markdown-editor.theme.css';
@@ -17,4 +18,8 @@
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--line) transparent;
+}
+
+.app-dialog {
+  @apply bg-panel rounded p-6;
 }

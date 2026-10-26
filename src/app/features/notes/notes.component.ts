@@ -1,41 +1,30 @@
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  inject,
-  signal,
-  viewChild,
-} from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, viewChild } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { NoteListItemComponent } from './note-list-item/note-list-item.component';
-import { ModalComponent } from '../../shared/modal/modal.component';
-import { NOTE_TITLE_MAX_LENGTH } from '../../data/note.model';
 import { ThemePickerComponent } from '../../shared/theme-picker/theme-picker.component';
 import { filter } from 'rxjs';
 import { LibraryFacade } from '../../data/library.facade';
 import { NotesStore } from '../../data/notes.store';
+import { Dialog } from '@angular/cdk/dialog';
+import { CreateNoteDialogComponent } from './create-note-dialog/create-note-dialog.component';
 
 @Component({
   selector: 'app-notes',
-  imports: [FormsModule, RouterOutlet, NoteListItemComponent, ModalComponent, ThemePickerComponent],
+  imports: [RouterOutlet, NoteListItemComponent, ThemePickerComponent],
   templateUrl: './notes.component.html',
   styleUrl: './notes.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotesComponent {
   private readonly router = inject(Router);
+  private readonly dialog = inject(Dialog);
 
   // Читаем из стора, меняем через фасад
   protected readonly notesStore = inject(NotesStore);
   private readonly library = inject(LibraryFacade);
 
   private readonly scrollContainer = viewChild.required<ElementRef<HTMLElement>>('scrollContainer');
-
-  protected readonly titleMaxLength = NOTE_TITLE_MAX_LENGTH;
-  protected readonly isCreateOpen = signal(false);
-  protected readonly draftTitle = signal('');
 
   constructor() {
     // Прокручивается <main>, а не окно, поэтому встроенный сброс прокрутки роутера сюда не дотягивается
@@ -45,17 +34,6 @@ export class NotesComponent {
         takeUntilDestroyed()
       )
       .subscribe(() => (this.scrollContainer().nativeElement.scrollTop = 0));
-  }
-
-  protected createNote(): void {
-    const title = this.draftTitle().trim();
-    if (!title) return;
-
-    const id = this.library.createNote(title);
-
-    this.closeCreate();
-
-    this.router.navigate(['/notes', id]);
   }
 
   protected deleteNote(id: string): void {
@@ -68,12 +46,15 @@ export class NotesComponent {
     }
   }
 
-  protected openCreate(): void {
-    this.draftTitle.set('');
-    this.isCreateOpen.set(true);
-  }
+  protected openDialog(): void {
+    const dialogRef = this.dialog.open<string>(CreateNoteDialogComponent);
 
-  protected closeCreate(): void {
-    this.isCreateOpen.set(false);
+    dialogRef.closed.subscribe((title) => {
+      if (!title) return;
+
+      const id = this.library.createNote(title);
+
+      this.router.navigate(['/notes', id]);
+    });
   }
 }
