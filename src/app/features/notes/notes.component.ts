@@ -15,6 +15,7 @@ import { CreateNoteDialogComponent } from './create-note-dialog/create-note-dial
   templateUrl: './notes.component.html',
   styleUrl: './notes.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'flex flex-1 min-w-0' },
 })
 export class NotesComponent {
   private readonly router = inject(Router);

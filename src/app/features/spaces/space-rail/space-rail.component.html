@@ -1,0 +1,9 @@
+<nav class="flex flex-col items-center gap-2">
+  <a class="w-10 h-10 flex items-center justify-center rounded-full bg-panel hover:bg-hover">☰</a>
+
+  <hr class="w-6 rounded-full border-line" />
+
+  @for (space of spacesStore.spaces(); track space.id) {
+    <app-space-rail-item [space]="space" />
+  }
+</nav>
