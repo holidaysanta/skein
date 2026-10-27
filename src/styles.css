@@ -15,11 +15,36 @@
   --color-accent: var(--accent);
 }
 
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--line) transparent;
-}
-
 .app-dialog {
   @apply bg-panel rounded p-6;
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--line);
+  border-radius: 4px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: transparent;
+  }
+  *:hover {
+    scrollbar-color: var(--line) transparent;
+  }
 }
