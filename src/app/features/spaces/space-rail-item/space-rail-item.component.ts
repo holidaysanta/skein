@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { Space } from '../../../data/space.model';
-import { SPACE_COLOR_CLASSES } from '../space-color';
+import { SPACE_COLOR_CLASSES } from '../space-colors';
 
 @Component({
   selector: 'app-space-rail-item',
