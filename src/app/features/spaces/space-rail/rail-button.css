@@ -1,0 +1,18 @@
+.rail-button {
+  /* база: размер, центрирование, эмодзи */
+  @apply flex h-10 w-10 items-center justify-center text-xl select-none;
+
+  /* анимации */
+  @apply transition-all duration-200 active:scale-90 motion-reduce:transition-none;
+
+  /* покой */
+  @apply rounded-[50%] bg-panel hover:bg-(--space-color)/20;
+
+  /* актив: когда routerLinkActive поставит aria-current="page" */
+  @apply aria-[current=page]:rounded-xl
+         aria-[current=page]:bg-(--space-color)
+         aria-[current=page]:ring-2
+         aria-[current=page]:ring-(--space-color)/80
+         aria-[current=page]:ring-offset-2
+         aria-[current=page]:ring-offset-app;
+}

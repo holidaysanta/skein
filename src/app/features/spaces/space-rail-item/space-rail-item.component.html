@@ -1,7 +1,12 @@
 <a
-  class="w-10 h-10 flex items-center justify-center rounded-full bg-panel text-xl cursor-pointer"
-  [class]="colorsClass().hover"
+  class="rail-button"
+  routerLinkActive
+  ariaCurrentWhenActive="page"
+  draggable="false"
+  [routerLink]="['/spaces', space().id, 'notes']"
   [title]="space().name"
+  [attr.aria-label]="space().name"
+  [style.--space-color]="color()"
 >
   {{ space().icon }}
 </a>

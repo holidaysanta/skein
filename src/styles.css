@@ -4,6 +4,7 @@
 @import '@milkdown/crepe/theme/common/style.css';
 @import '@milkdown/crepe/theme/frame-dark.css';
 @import './app/shared/markdown-editor/markdown-editor.theme.css';
+@import './app/features/spaces/space-rail/rail-button.css';
 
 @theme inline {
   --color-app: var(--app);
