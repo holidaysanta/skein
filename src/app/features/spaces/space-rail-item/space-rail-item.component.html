@@ -1,5 +1,6 @@
 <a
-  class="w-10 h-10 flex items-center justify-center rounded-full bg-panel text-xl hover:bg-hover"
+  class="w-10 h-10 flex items-center justify-center rounded-full bg-panel text-xl cursor-pointer"
+  [class]="colorsClass().hover"
   [title]="space().name"
 >
   {{ space().icon }}
