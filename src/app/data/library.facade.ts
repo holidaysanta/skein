@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { computed, inject, Injectable, Signal } from '@angular/core';
 import { NotesStore } from './notes.store';
 import { SpacesStore } from './spaces.store';
 import { Note } from './note.model';
@@ -36,5 +36,27 @@ export class LibraryFacade {
 
   updateNote(id: string, changes: Partial<Note>): void {
     this.notesStore.updateNote(id, changes);
+  }
+
+  notesForSpace(spaceId: Signal<string | undefined>): Signal<Note[]> {
+    const spaceNoteIds = computed(() => {
+      const activeSpaceId = spaceId();
+      if (!activeSpaceId) return new Set<string>();
+
+      const noteIds = this.spacesStore
+        .links()
+        .filter((link) => link.spaceId === activeSpaceId)
+        .map((link) => link.noteId);
+
+      return new Set(noteIds);
+    });
+
+    const visibleNotes = computed(() => {
+      if (!spaceId()) return this.notesStore.notes();
+
+      return this.notesStore.notes().filter((note) => spaceNoteIds().has(note.id));
+    });
+
+    return visibleNotes;
   }
 }

@@ -2,7 +2,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   ElementRef,
   inject,
   input,
@@ -13,10 +12,8 @@ import { NoteListItemComponent } from './note-list-item/note-list-item.component
 import { ThemePickerComponent } from '../../shared/theme-picker/theme-picker.component';
 import { filter } from 'rxjs';
 import { LibraryFacade } from '../../data/library.facade';
-import { NotesStore } from '../../data/notes.store';
 import { Dialog } from '@angular/cdk/dialog';
 import { CreateNoteDialogComponent } from './create-note-dialog/create-note-dialog.component';
-import { SpacesStore } from '../../data/spaces.store';
 
 @Component({
   selector: 'app-notes',
@@ -29,33 +26,13 @@ import { SpacesStore } from '../../data/spaces.store';
 export class NotesComponent {
   private readonly router = inject(Router);
   private readonly dialog = inject(Dialog);
-
-  // Читаем из стора, меняем через фасад
-  protected readonly notesStore = inject(NotesStore);
   private readonly library = inject(LibraryFacade);
-  private readonly spaceStore = inject(SpacesStore);
 
   readonly spaceId = input<string>();
 
   private readonly scrollContainer = viewChild.required<ElementRef<HTMLElement>>('scrollContainer');
 
-  private readonly spaceNoteIds = computed(() => {
-    const activeSpaceId = this.spaceId();
-    if (!activeSpaceId) return new Set<string>();
-
-    const noteIds = this.spaceStore
-      .links()
-      .filter((link) => link.spaceId === activeSpaceId)
-      .map((link) => link.noteId);
-
-    return new Set(noteIds);
-  });
-
-  protected readonly visibleNotes = computed(() => {
-    if (!this.spaceId()) return this.notesStore.notes();
-
-    return this.notesStore.notes().filter((note) => this.spaceNoteIds().has(note.id));
-  });
+  protected readonly visibleNotes = this.library.notesForSpace(this.spaceId);
 
   constructor() {
     // Прокручивается <main>, а не окно, поэтому встроенный сброс прокрутки роутера сюда не дотягивается
