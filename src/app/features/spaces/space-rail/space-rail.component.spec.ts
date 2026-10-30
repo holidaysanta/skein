@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SpaceRailComponent } from './space-rail.component';
+import { provideRouter } from '@angular/router';
 
 describe('SpaceRailComponent', () => {
   let component: SpaceRailComponent;
@@ -8,9 +9,9 @@ describe('SpaceRailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SpaceRailComponent]
-    })
-    .compileComponents();
+      imports: [SpaceRailComponent],
+      providers: [provideRouter([])],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SpaceRailComponent);
     component = fixture.componentInstance;
