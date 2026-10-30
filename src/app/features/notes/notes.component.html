@@ -4,7 +4,7 @@
   </div>
 
   <nav class="flex flex-1 flex-col gap-2 overflow-y-auto px-2 pb-4">
-    @for (note of notesStore.notes(); track note.id) {
+    @for (note of visibleNotes(); track note.id) {
       <app-note-list-item [note]="note" (deleted)="deleteNote(note.id)" />
     } @empty {
       <p class="px-2 text-muted">У вас нет ни одной заметки</p>
