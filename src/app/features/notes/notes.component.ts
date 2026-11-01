@@ -60,9 +60,15 @@ export class NotesComponent {
     dialogRef.closed.subscribe((title) => {
       if (!title) return;
 
-      const id = this.library.createNote(title);
+      const spaceId = this.spaceId();
 
-      this.router.navigate(['/notes', id]);
+      const id = this.library.createNote(title, spaceId);
+
+      if (spaceId) {
+        this.router.navigate(['/spaces', spaceId, 'notes', id]);
+      } else {
+        this.router.navigate(['/notes', id]);
+      }
     });
   }
 }
