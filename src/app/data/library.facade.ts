@@ -18,6 +18,10 @@ export class LibraryFacade {
     this.spacesStore.removeNote(id);
   }
 
+  removeNoteFromSpace(noteId: string, spaceId: string) {
+    this.spacesStore.removeNoteFromSpace(noteId, spaceId);
+  }
+
   createNote(title: string, spaceId?: string): string {
     const id = crypto.randomUUID();
 

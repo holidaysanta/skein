@@ -7,7 +7,7 @@ import {
   input,
   viewChild,
 } from '@angular/core';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { NoteListItemComponent } from './note-list-item/note-list-item.component';
 import { ThemePickerComponent } from '../../shared/theme-picker/theme-picker.component';
 import { filter } from 'rxjs';
@@ -25,6 +25,7 @@ import { CreateNoteDialogComponent } from './create-note-dialog/create-note-dial
 })
 export class NotesComponent {
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
   private readonly dialog = inject(Dialog);
   private readonly library = inject(LibraryFacade);
 
@@ -45,12 +46,22 @@ export class NotesComponent {
   }
 
   protected deleteNote(id: string): void {
-    const isOpen = this.router.url === `/notes/${id}`;
+    const isCurrentNoteOpen = this.route.firstChild?.snapshot.paramMap.get('id') === id;
 
-    this.library.deleteNote(id);
+    const spaceId = this.spaceId();
 
-    if (isOpen) {
-      this.router.navigate(['/notes']);
+    if (spaceId) {
+      this.library.removeNoteFromSpace(id, spaceId);
+    } else {
+      this.library.deleteNote(id);
+    }
+
+    if (isCurrentNoteOpen) {
+      if (spaceId) {
+        this.router.navigate(['/spaces', spaceId]);
+      } else {
+        this.router.navigate(['/notes']);
+      }
     }
   }
 
