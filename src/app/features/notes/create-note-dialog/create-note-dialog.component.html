@@ -3,13 +3,14 @@
 
   <input
     name="title"
+    class="form-input"
     [(ngModel)]="draftTitle"
     [maxlength]="titleMaxLength"
     placeholder="Заголовок"
   />
 
   <div class="flex w-full justify-end gap-4">
-    <button type="submit">Создать</button>
-    <button type="button" (click)="cancel()">Отмена</button>
+    <button class="button button--secondary" type="button" (click)="cancel()">Отмена</button>
+    <button class="button button--primary" type="submit">Создать</button>
   </div>
 </form>
