@@ -1,12 +1,14 @@
 <a
-  class="rail-button"
+  class="space-button"
   routerLinkActive
   ariaCurrentWhenActive="page"
   draggable="false"
   [routerLink]="['/spaces', space().id, 'notes']"
   [title]="space().name"
   [attr.aria-label]="space().name"
-  [style.--space-color]="color()"
+  [style.--space-color]="colorValue()"
 >
-  {{ space().icon }}
+  <svg width="24" height="24" aria-hidden="true">
+    <use [attr.href]="'/icons.svg#' + space().icon" />
+  </svg>
 </a>

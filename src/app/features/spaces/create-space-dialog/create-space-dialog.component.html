@@ -1,0 +1,40 @@
+<form (ngSubmit)="submit()" [formGroup]="form" class="flex w-full max-w-lg flex-col gap-6">
+  <h2 id="create-space-title" class="text-xl font-semibold">Новое пространство</h2>
+
+  @let showNameError = form.controls.name.invalid && form.controls.name.touched;
+  <div class="grid grid-cols-[3rem_minmax(0,1fr)] gap-x-4 gap-y-2">
+    <div
+      class="col-start-1 row-start-2 flex size-12 items-center justify-center rounded-2xl bg-(--space-color) transition-colors duration-200 motion-reduce:transition-none"
+      [style.--space-color]="colorValues[form.controls.color.value]"
+    >
+      <svg width="24" height="24" aria-hidden="true">
+        <use [attr.href]="'/icons.svg#' + form.controls.icon.value" />
+      </svg>
+    </div>
+
+    <label class="form-label col-start-2 row-start-1" for="space-name">Название</label>
+    <input
+      class="form-input col-start-2 row-start-2"
+      id="space-name"
+      type="text"
+      formControlName="name"
+      [attr.aria-invalid]="showNameError ? 'true' : null"
+      [attr.aria-describedby]="showNameError ? 'space-name-error' : null"
+    />
+
+    @if (showNameError) {
+      <p id="space-name-error" class="form-error col-start-2 row-start-3 px-3">
+        Укажите название пространства
+      </p>
+    }
+  </div>
+
+  <app-space-icon-picker [control]="form.controls.icon" [color]="form.controls.color.value" />
+
+  <app-space-color-picker [control]="form.controls.color" />
+
+  <div class="flex justify-end flex-wrap gap-3">
+    <button class="button button--secondary" type="button" (click)="cancel()">Отмена</button>
+    <button class="button button--primary" type="submit" [disabled]="form.invalid">Создать</button>
+  </div>
+</form>

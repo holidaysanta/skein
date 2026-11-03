@@ -2,6 +2,7 @@ import { computed, inject, Injectable, Signal } from '@angular/core';
 import { NotesStore } from './notes.store';
 import { SpacesStore } from './spaces.store';
 import { Note } from './note.model';
+import { Space, SpaceColor } from './space.model';
 
 /**
  * Все изменения заметок и пространств — только через фасад:
@@ -40,6 +41,20 @@ export class LibraryFacade {
 
   updateNote(id: string, changes: Partial<Note>): void {
     this.notesStore.updateNote(id, changes);
+  }
+
+  createSpace(name: string, icon: string, color: SpaceColor): string {
+    const id = crypto.randomUUID();
+
+    this.spacesStore.addSpace({
+      id,
+      name,
+      icon,
+      color,
+      createdAt: Date.now(),
+    });
+
+    return id;
   }
 
   notesForSpace(spaceId: Signal<string | undefined>): Signal<Note[]> {

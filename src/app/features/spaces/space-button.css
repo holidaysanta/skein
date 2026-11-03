@@ -1,0 +1,19 @@
+.space-button {
+  @apply flex size-10 items-center justify-center select-none;
+  @apply rounded-[50%] bg-panel hover:bg-(--space-color)/20;
+  @apply transition-[border-radius,background-color,box-shadow,transform] duration-200;
+  @apply motion-safe:active:scale-90 motion-reduce:transition-none;
+}
+
+/* Активная ссылка или выбранный вариант в радиогруппе */
+.space-button[aria-current='page'],
+.space-button:has(input:checked) {
+  @apply rounded-xl bg-(--space-color);
+  @apply ring-2 ring-(--space-color)/80 ring-offset-2;
+  --tw-ring-offset-color: var(--space-button-ring-offset, var(--app));
+}
+
+/* Фокус скрытой радиокнопки показываем на её плитке */
+.space-button:has(input:focus-visible) {
+  @apply outline-2 outline-offset-4 outline-current;
+}

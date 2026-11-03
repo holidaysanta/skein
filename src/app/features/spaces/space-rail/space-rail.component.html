@@ -3,7 +3,7 @@
     routerLink="/notes"
     routerLinkActive
     ariaCurrentWhenActive="page"
-    class="rail-button"
+    class="space-button"
     title="Все заметки"
     aria-label="Все заметки"
     style="--space-color: var(--accent)"
@@ -16,4 +16,6 @@
   @for (space of spacesStore.spaces(); track space.id) {
     <app-space-rail-item [space]="space" />
   }
+
+  <button type="button" (click)="openDialog()">+</button>
 </nav>

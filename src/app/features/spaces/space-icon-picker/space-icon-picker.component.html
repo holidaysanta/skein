@@ -1,0 +1,17 @@
+<fieldset [style.--space-color]="colorValues[color()]">
+  <legend class="form-label mb-3">Иконка</legend>
+
+  <div class="flex flex-wrap gap-3 [--space-button-ring-offset:var(--panel)]">
+    @for (icon of icons; track icon) {
+      <label class="space-button cursor-pointer" [title]="iconLabels[icon]">
+        <input class="sr-only" type="radio" name="icon" [formControl]="control()" [value]="icon" />
+
+        <svg width="24" height="24" aria-hidden="true">
+          <use [attr.href]="'/icons.svg#' + icon" />
+        </svg>
+
+        <span class="sr-only">{{ iconLabels[icon] }}</span>
+      </label>
+    }
+  </div>
+</fieldset>

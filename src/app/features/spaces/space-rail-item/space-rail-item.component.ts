@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { Space } from '../../../data/space.model';
+import { Space, SPACE_ICONS } from '../../../data/space.model';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SPACE_COLOR_VALUES } from '../space-colors';
 
@@ -13,7 +13,7 @@ import { SPACE_COLOR_VALUES } from '../space-colors';
 export class SpaceRailItemComponent {
   readonly space = input.required<Space>();
 
-  protected readonly color = computed(() => {
+  protected readonly colorValue = computed(() => {
     return SPACE_COLOR_VALUES[this.space().color];
   });
 }

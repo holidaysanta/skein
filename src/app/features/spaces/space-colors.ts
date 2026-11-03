@@ -10,3 +10,14 @@ export const SPACE_COLOR_VALUES: Record<SpaceColor, string> = {
   violet: '#9d8fd6',
   red: '#d27f7f',
 };
+
+export const SPACE_COLOR_LABELS: Record<SpaceColor, string> = {
+  blue: 'Синий',
+  green: 'Зелёный',
+  orange: 'Оранжевый',
+  yellow: 'Жёлтый',
+  pink: 'Розовый',
+  teal: 'Бирюзовый',
+  violet: 'Фиолетовый',
+  red: 'Красный',
+};
