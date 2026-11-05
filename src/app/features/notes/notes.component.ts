@@ -2,6 +2,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   ElementRef,
   inject,
   input,
@@ -13,11 +14,25 @@ import { ThemePickerComponent } from '../../shared/theme-picker/theme-picker.com
 import { filter } from 'rxjs';
 import { LibraryFacade } from '../../data/library.facade';
 import { Dialog } from '@angular/cdk/dialog';
+import { CdkMenuModule } from '@angular/cdk/menu';
 import { CreateNoteDialogComponent } from './create-note-dialog/create-note-dialog.component';
+import { SpacesStore } from '../../data/spaces.store';
+import { SpaceBadgeComponent } from '../../shared/space-badge/space-badge.component';
+import { Space } from '../../data/space.model';
+import {
+  DeleteSpaceDialogComponent,
+  DeleteSpaceDialogData,
+} from '../spaces/delete-space-dialog/delete-space-dialog.component';
 
 @Component({
   selector: 'app-notes',
-  imports: [RouterOutlet, NoteListItemComponent, ThemePickerComponent],
+  imports: [
+    RouterOutlet,
+    NoteListItemComponent,
+    ThemePickerComponent,
+    SpaceBadgeComponent,
+    CdkMenuModule,
+  ],
   templateUrl: './notes.component.html',
   styleUrl: './notes.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,12 +43,17 @@ export class NotesComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly dialog = inject(Dialog);
   private readonly library = inject(LibraryFacade);
+  private readonly spaceStore = inject(SpacesStore);
 
   readonly spaceId = input<string>();
 
   private readonly scrollContainer = viewChild.required<ElementRef<HTMLElement>>('scrollContainer');
 
   protected readonly visibleNotes = this.library.notesForSpace(this.spaceId);
+
+  protected readonly currentSpace = computed(() => {
+    return this.spaceStore.spaces().find((space) => space.id === this.spaceId());
+  });
 
   constructor() {
     // Прокручивается <main>, а не окно, поэтому встроенный сброс прокрутки роутера сюда не дотягивается
@@ -63,6 +83,23 @@ export class NotesComponent {
         this.router.navigate(['/notes']);
       }
     }
+  }
+
+  protected openDeleteSpaceDialog(space: Space): void {
+    const dialogRef = this.dialog.open<boolean, DeleteSpaceDialogData>(DeleteSpaceDialogComponent, {
+      data: { name: space.name },
+      ariaLabelledBy: 'delete-space-title',
+    });
+
+    dialogRef.closed.subscribe((confirmed) => {
+      if (!confirmed) return;
+
+      this.library.deleteSpace(space.id);
+
+      if (this.spaceId() === space.id) {
+        this.router.navigate(['/notes']);
+      }
+    });
   }
 
   protected openDialog(): void {

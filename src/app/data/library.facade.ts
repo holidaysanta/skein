@@ -57,6 +57,10 @@ export class LibraryFacade {
     return id;
   }
 
+  deleteSpace(spaceId: string): void {
+    this.spacesStore.deleteSpace(spaceId);
+  }
+
   notesForSpace(spaceId: Signal<string | undefined>): Signal<Note[]> {
     const spaceNoteIds = computed(() => {
       const activeSpaceId = spaceId();
