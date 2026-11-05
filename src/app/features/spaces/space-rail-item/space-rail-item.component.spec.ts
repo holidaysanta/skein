@@ -18,7 +18,7 @@ describe('SpaceRailItemComponent', () => {
     fixture.componentRef.setInput('space', {
       id: '1',
       name: 'work',
-      icon: '💼',
+      icon: 'messages-square',
       color: 'blue',
       createdAt: 22.12,
     } satisfies Space);

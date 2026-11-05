@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { Space, SPACE_ICONS } from '../../../data/space.model';
+import { Space } from '../../../data/space.model';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { SPACE_COLOR_VALUES } from '../space-colors';
+import { SPACE_COLOR_VALUES } from '../../../shared/space-colors';
 
 @Component({
   selector: 'app-space-rail-item',

@@ -1,5 +1,5 @@
 import { effect, Injectable, signal } from '@angular/core';
-import { NoteSpaceLink, Space, SPACE_COLORS } from './space.model';
+import { NoteSpaceLink, Space, SPACE_COLORS, SPACE_ICONS } from './space.model';
 import { loadList } from '../core/storage';
 
 const SPACES_KEY = 'skein.spaces';
@@ -12,7 +12,7 @@ function isSpace(value: unknown): value is Space {
   return (
     typeof space['id'] === 'string' &&
     typeof space['name'] === 'string' &&
-    typeof space['icon'] === 'string' &&
+    SPACE_ICONS.some((icon) => icon === space['icon']) &&
     SPACE_COLORS.some((color) => color === space['color']) &&
     typeof space['createdAt'] === 'number'
   );

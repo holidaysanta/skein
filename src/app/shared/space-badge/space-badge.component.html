@@ -1,0 +1,8 @@
+<div
+  class="flex size-12 items-center justify-center rounded-2xl bg-(--space-color) transition-colors duration-200 motion-reduce:transition-none"
+  [style.--space-color]="colorValues[color()]"
+>
+  <svg width="24" height="24" aria-hidden="true">
+    <use [attr.href]="'/icons.svg#' + icon()" />
+  </svg>
+</div>

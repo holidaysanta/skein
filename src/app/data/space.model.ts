@@ -1,3 +1,5 @@
+export const SPACE_NAME_MAX_LENGTH = 50;
+
 export const SPACE_COLORS = [
   'blue',
   'green',
@@ -27,7 +29,7 @@ export type SpaceIcon = (typeof SPACE_ICONS)[number];
 export interface Space {
   id: string;
   name: string;
-  icon: string;
+  icon: SpaceIcon;
   color: SpaceColor;
   createdAt: number;
 }

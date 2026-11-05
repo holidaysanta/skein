@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SPACE_COLORS, SpaceColor } from '../../../data/space.model';
-import { SPACE_COLOR_LABELS, SPACE_COLOR_VALUES } from '../space-colors';
+import { SPACE_COLOR_LABELS, SPACE_COLOR_VALUES } from '../../../shared/space-colors';
 
 @Component({
   selector: 'app-space-color-picker',

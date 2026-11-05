@@ -1,4 +1,4 @@
-import { SpaceColor } from '../../data/space.model';
+import { SpaceColor } from '../data/space.model';
 
 export const SPACE_COLOR_VALUES: Record<SpaceColor, string> = {
   blue: '#7ba3d9',
