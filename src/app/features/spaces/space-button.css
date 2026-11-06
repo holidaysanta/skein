@@ -1,8 +1,8 @@
 .space-button {
   @apply flex size-10 items-center justify-center select-none;
   @apply rounded-[50%] bg-panel hover:bg-(--space-color)/20;
-  @apply transition-[border-radius,background-color,box-shadow,transform] duration-200;
-  @apply motion-safe:active:scale-90 motion-reduce:transition-none;
+  @apply transition-[border-radius,background-color,box-shadow] duration-200;
+  @apply motion-reduce:transition-none;
 }
 
 /* Активная ссылка или выбранный вариант в радиогруппе */
