@@ -2,7 +2,7 @@ import { computed, inject, Injectable, Signal } from '@angular/core';
 import { NotesStore } from './notes.store';
 import { SpacesStore } from './spaces.store';
 import { Note } from './note.model';
-import { SpaceColor, SpaceIcon } from './space.model';
+import { SpaceColor, SpaceDraft, SpaceIcon } from './space.model';
 
 /**
  * Все изменения заметок и пространств — только через фасад:
@@ -59,6 +59,10 @@ export class LibraryFacade {
 
   deleteSpace(spaceId: string): void {
     this.spacesStore.deleteSpace(spaceId);
+  }
+
+  updateSpace(id: string, changes: SpaceDraft): void {
+    this.spacesStore.updateSpace(id, changes);
   }
 
   notesForSpace(spaceId: Signal<string | undefined>): Signal<Note[]> {

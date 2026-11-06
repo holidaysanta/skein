@@ -1,40 +1,57 @@
-import { DialogRef } from '@angular/cdk/dialog';
+import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Space, SPACE_NAME_MAX_LENGTH, SpaceColor, SpaceIcon } from '../../../data/space.model';
+import {
+  SPACE_NAME_MAX_LENGTH,
+  SpaceColor,
+  SpaceDraft,
+  SpaceIcon,
+} from '../../../data/space.model';
 import { SpaceIconPickerComponent } from '../space-icon-picker/space-icon-picker.component';
 import { SpaceColorPickerComponent } from '../space-color-picker/space-color-picker.component';
 import { SpaceBadgeComponent } from '../../../shared/space-badge/space-badge.component';
 
-export type CreateSpaceDialogResult = Pick<Space, 'name' | 'icon' | 'color'>;
+export interface SpaceFormDialogData {
+  space: SpaceDraft;
+}
 
 @Component({
-  selector: 'app-create-space-dialog',
+  selector: 'app-space-form-dialog',
   imports: [
     ReactiveFormsModule,
     SpaceIconPickerComponent,
     SpaceColorPickerComponent,
     SpaceBadgeComponent,
   ],
-  templateUrl: './create-space-dialog.component.html',
-  styleUrl: './create-space-dialog.component.scss',
+  templateUrl: './space-form-dialog.component.html',
+  styleUrl: './space-form-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateSpaceDialogComponent {
-  private readonly dialogRef = inject<DialogRef<CreateSpaceDialogResult>>(DialogRef);
+export class SpaceFormDialogComponent {
+  private readonly dialogRef = inject<DialogRef<SpaceDraft>>(DialogRef);
+  private readonly data = inject<SpaceFormDialogData | null>(DIALOG_DATA);
 
   private readonly formBuilder = inject(NonNullableFormBuilder);
 
   protected readonly nameMaxLength = SPACE_NAME_MAX_LENGTH;
 
+  protected readonly title = this.data ? 'Редактирование пространства' : 'Новое пространство';
+  protected readonly submitLabel = this.data ? 'Сохранить' : 'Создать';
+
   protected readonly form = this.formBuilder.group({
-    name: this.formBuilder.control('', [
+    name: this.formBuilder.control(this.data?.space.name ?? '', [
       Validators.required,
       Validators.pattern(/\S/),
       Validators.maxLength(SPACE_NAME_MAX_LENGTH),
     ]),
-    icon: this.formBuilder.control<SpaceIcon>('messages-square', Validators.required),
-    color: this.formBuilder.control<SpaceColor>('blue', Validators.required),
+    icon: this.formBuilder.control<SpaceIcon>(
+      this.data?.space.icon ?? 'messages-square',
+      Validators.required
+    ),
+    color: this.formBuilder.control<SpaceColor>(
+      this.data?.space.color ?? 'blue',
+      Validators.required
+    ),
   });
 
   protected submit(): void {

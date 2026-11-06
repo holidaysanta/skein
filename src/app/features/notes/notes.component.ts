@@ -18,11 +18,15 @@ import { CdkMenuModule } from '@angular/cdk/menu';
 import { CreateNoteDialogComponent } from './create-note-dialog/create-note-dialog.component';
 import { SpacesStore } from '../../data/spaces.store';
 import { SpaceBadgeComponent } from '../../shared/space-badge/space-badge.component';
-import { Space } from '../../data/space.model';
+import { Space, SpaceDraft } from '../../data/space.model';
 import {
   DeleteSpaceDialogComponent,
   DeleteSpaceDialogData,
 } from '../spaces/delete-space-dialog/delete-space-dialog.component';
+import {
+  SpaceFormDialogComponent,
+  SpaceFormDialogData,
+} from '../spaces/space-form-dialog/space-form-dialog.component';
 
 @Component({
   selector: 'app-notes',
@@ -100,6 +104,25 @@ export class NotesComponent {
       if (this.spaceId() === space.id) {
         this.router.navigate(['/notes']);
       }
+    });
+  }
+
+  protected openEditSpaceDialog(space: Space): void {
+    const dialogRef = this.dialog.open<SpaceDraft, SpaceFormDialogData>(SpaceFormDialogComponent, {
+      data: {
+        space: {
+          name: space.name,
+          icon: space.icon,
+          color: space.color,
+        },
+      },
+      ariaLabelledBy: 'space-form-title',
+    });
+
+    dialogRef.closed.subscribe((result) => {
+      if (!result) return;
+
+      this.library.updateSpace(space.id, result);
     });
   }
 

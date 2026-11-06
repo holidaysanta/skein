@@ -1,5 +1,5 @@
 <form (ngSubmit)="submit()" [formGroup]="form" class="flex w-full max-w-lg flex-col gap-6">
-  <h2 id="create-space-title" class="text-xl font-semibold">Новое пространство</h2>
+  <h2 id="space-form-title" class="text-xl font-semibold">{{ title }}</h2>
 
   @let showNameError = form.controls.name.invalid && form.controls.name.touched;
   <div class="grid grid-cols-[3rem_minmax(0,1fr)] gap-x-4 gap-y-2">
@@ -12,7 +12,7 @@
     <div class="col-start-2 row-start-1 flex items-center justify-between gap-3 px-3">
       <label class="form-label" for="space-name">Название</label>
 
-      <span class="text-xs font-medium tabular-nums text-muted">
+      <span class="text-xs font-medium tabular-nums text-muted" aria-hidden="true">
         {{ form.controls.name.value.length }} / {{ nameMaxLength }}
       </span>
     </div>
@@ -45,6 +45,8 @@
 
   <div class="flex justify-end flex-wrap gap-3">
     <button class="button button--secondary" type="button" (click)="cancel()">Отмена</button>
-    <button class="button button--primary" type="submit" [disabled]="form.invalid">Создать</button>
+    <button class="button button--primary" type="submit" [disabled]="form.invalid">
+      {{ submitLabel }}
+    </button>
   </div>
 </form>

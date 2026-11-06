@@ -1,5 +1,5 @@
 import { effect, Injectable, signal } from '@angular/core';
-import { NoteSpaceLink, Space, SPACE_COLORS, SPACE_ICONS } from './space.model';
+import { NoteSpaceLink, Space, SPACE_COLORS, SPACE_ICONS, SpaceDraft } from './space.model';
 import { loadList } from '../core/storage';
 
 const SPACES_KEY = 'skein.spaces';
@@ -45,6 +45,12 @@ export class SpacesStore {
 
   addSpace(space: Space): void {
     this._spaces.update((spaces) => [...spaces, space]);
+  }
+
+  updateSpace(id: string, changes: SpaceDraft): void {
+    this._spaces.update((spaces) =>
+      spaces.map((space) => (space.id === id ? { ...space, ...changes } : space))
+    );
   }
 
   addNoteToSpace(noteId: string, spaceId: string): void {

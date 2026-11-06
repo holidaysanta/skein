@@ -3,11 +3,9 @@ import { SpacesStore } from '../../../data/spaces.store';
 import { SpaceRailItemComponent } from '../space-rail-item/space-rail-item.component';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Dialog } from '@angular/cdk/dialog';
-import {
-  CreateSpaceDialogComponent,
-  CreateSpaceDialogResult,
-} from '../create-space-dialog/create-space-dialog.component';
+import { SpaceFormDialogComponent } from '../space-form-dialog/space-form-dialog.component';
 import { LibraryFacade } from '../../../data/library.facade';
+import { SpaceDraft } from '../../../data/space.model';
 
 @Component({
   selector: 'app-space-rail',
@@ -24,8 +22,8 @@ export class SpaceRailComponent {
   protected readonly dialog = inject(Dialog);
 
   protected openCreateSpaceDialog() {
-    const dialogRef = this.dialog.open<CreateSpaceDialogResult>(CreateSpaceDialogComponent, {
-      ariaLabelledBy: 'create-space-title',
+    const dialogRef = this.dialog.open<SpaceDraft>(SpaceFormDialogComponent, {
+      ariaLabelledBy: 'space-form-title',
     });
 
     dialogRef.closed.subscribe((space) => {

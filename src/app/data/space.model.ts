@@ -34,6 +34,8 @@ export interface Space {
   createdAt: number;
 }
 
+export type SpaceDraft = Pick<Space, 'name' | 'icon' | 'color'>;
+
 export interface NoteSpaceLink {
   noteId: string;
   spaceId: string;
