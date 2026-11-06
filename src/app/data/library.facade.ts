@@ -16,7 +16,7 @@ export class LibraryFacade {
 
   deleteNote(id: string): void {
     this.notesStore.deleteNote(id);
-    this.spacesStore.removeNote(id);
+    this.spacesStore.removeNoteLinks(id);
   }
 
   removeNoteFromSpace(noteId: string, spaceId: string) {
@@ -62,6 +62,7 @@ export class LibraryFacade {
   }
 
   notesForSpace(spaceId: Signal<string | undefined>): Signal<Note[]> {
+    // Отдельный computed сохраняет Set при изменении текста или заголовка заметок.
     const spaceNoteIds = computed(() => {
       const activeSpaceId = spaceId();
       if (!activeSpaceId) return new Set<string>();

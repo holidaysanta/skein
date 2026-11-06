@@ -23,7 +23,7 @@ export class SpaceRailComponent {
   protected readonly spacesStore = inject(SpacesStore);
   protected readonly dialog = inject(Dialog);
 
-  protected openDialog() {
+  protected openCreateSpaceDialog() {
     const dialogRef = this.dialog.open<CreateSpaceDialogResult>(CreateSpaceDialogComponent, {
       ariaLabelledBy: 'create-space-title',
     });

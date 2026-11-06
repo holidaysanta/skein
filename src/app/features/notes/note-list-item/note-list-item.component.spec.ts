@@ -16,6 +16,7 @@ describe('NoteListItemComponent', () => {
     fixture = TestBed.createComponent(NoteListItemComponent);
     fixture.componentRef.setInput('note', { id: '1', title: 'Тест', text: 'Привет' });
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('removeLabel', 'Удалить заметку');
     fixture.detectChanges();
   });
 

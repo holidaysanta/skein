@@ -55,7 +55,7 @@ export class SpacesStore {
     this._links.update((links) => [...links, { noteId, spaceId }]);
   }
 
-  removeNote(noteId: string): void {
+  removeNoteLinks(noteId: string): void {
     this._links.update((links) => links.filter((link) => link.noteId !== noteId));
   }
 

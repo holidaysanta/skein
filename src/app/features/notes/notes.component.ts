@@ -65,7 +65,8 @@ export class NotesComponent {
       .subscribe(() => (this.scrollContainer().nativeElement.scrollTop = 0));
   }
 
-  protected deleteNote(id: string): void {
+  // В пространстве убираем только связь; в общем списке удаляем заметку полностью.
+  protected removeNote(id: string): void {
     const isCurrentNoteOpen = this.route.firstChild?.snapshot.paramMap.get('id') === id;
 
     const spaceId = this.spaceId();
@@ -102,7 +103,7 @@ export class NotesComponent {
     });
   }
 
-  protected openDialog(): void {
+  protected openCreateNoteDialog(): void {
     const dialogRef = this.dialog.open<string>(CreateNoteDialogComponent);
 
     dialogRef.closed.subscribe((title) => {

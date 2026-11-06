@@ -12,5 +12,6 @@ import { MarkdownToPlainPipe } from '../../../shared/markdown-to-plain/markdown-
 })
 export class NoteListItemComponent {
   readonly note = input.required<Note>();
-  readonly deleted = output<void>();
+  readonly removeLabel = input.required<string>();
+  readonly removeRequested = output<void>();
 }

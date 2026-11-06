@@ -36,14 +36,18 @@
   }
 
   <div class="p-4">
-    <button type="button" class="button button--primary" (click)="openDialog()">
+    <button type="button" class="button button--primary" (click)="openCreateNoteDialog()">
       Добавить новую заметку
     </button>
   </div>
 
   <nav class="flex flex-1 flex-col gap-2 overflow-y-auto px-2 pb-4">
     @for (note of visibleNotes(); track note.id) {
-      <app-note-list-item [note]="note" (deleted)="deleteNote(note.id)" />
+      <app-note-list-item
+        [note]="note"
+        [removeLabel]="spaceId() ? 'Убрать из пространства' : 'Удалить заметку'"
+        (removeRequested)="removeNote(note.id)"
+      />
     } @empty {
       <p class="px-2 text-muted">У вас нет ни одной заметки</p>
     }
