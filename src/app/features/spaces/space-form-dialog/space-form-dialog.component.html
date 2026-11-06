@@ -45,7 +45,7 @@
 
   <div class="flex justify-end flex-wrap gap-3">
     <button class="button button--secondary" type="button" (click)="cancel()">Отмена</button>
-    <button class="button button--primary" type="submit" [disabled]="form.invalid">
+    <button class="button button--primary" type="submit" [disabled]="form.invalid || isUnchanged()">
       {{ submitLabel }}
     </button>
   </div>

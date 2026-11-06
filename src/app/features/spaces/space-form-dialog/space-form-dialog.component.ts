@@ -1,5 +1,5 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   SPACE_NAME_MAX_LENGTH,
@@ -10,6 +10,8 @@ import {
 import { SpaceIconPickerComponent } from '../space-icon-picker/space-icon-picker.component';
 import { SpaceColorPickerComponent } from '../space-color-picker/space-color-picker.component';
 import { SpaceBadgeComponent } from '../../../shared/space-badge/space-badge.component';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 
 export interface SpaceFormDialogData {
   space: SpaceDraft;
@@ -54,11 +56,32 @@ export class SpaceFormDialogComponent {
     ),
   });
 
+  private readonly formValue = toSignal(
+    this.form.valueChanges.pipe(map(() => this.form.getRawValue())),
+    { initialValue: this.form.getRawValue() }
+  );
+
+  protected readonly isUnchanged = computed(() => {
+    const initial = this.data?.space;
+
+    if (!initial) return false;
+
+    const value = this.formValue();
+
+    return (
+      value.name.trim() === initial.name &&
+      value.icon === initial.icon &&
+      value.color === initial.color
+    );
+  });
+
   protected submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
+
+    if (this.isUnchanged()) return;
 
     const result = this.form.getRawValue();
 
