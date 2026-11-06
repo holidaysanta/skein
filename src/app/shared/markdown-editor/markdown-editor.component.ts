@@ -49,6 +49,7 @@ export class MarkdownEditorComponent {
 
       this.crepe.on((listener) => {
         listener.markdownUpdated((_ctx, markdown) => {
+          // После переключения заметки может прийти отложенное событие со старым текстом.
           if (markdown !== this.crepe!.getMarkdown()) return;
           this.emitIfChanged(markdown);
         });

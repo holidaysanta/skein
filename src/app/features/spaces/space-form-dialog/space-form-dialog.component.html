@@ -1,0 +1,52 @@
+<form (ngSubmit)="submit()" [formGroup]="form" class="flex w-full max-w-lg flex-col gap-6">
+  <h2 id="space-form-title" class="text-xl font-semibold">{{ title }}</h2>
+
+  @let showNameError = form.controls.name.invalid && form.controls.name.touched;
+  <div class="grid grid-cols-[3rem_minmax(0,1fr)] gap-x-4 gap-y-2">
+    <app-space-badge
+      class="col-start-1 row-start-2"
+      [icon]="form.controls.icon.value"
+      [color]="form.controls.color.value"
+    />
+
+    <div class="col-start-2 row-start-1 flex items-center justify-between gap-3 px-3">
+      <label class="form-label" for="space-name">Название</label>
+
+      <span class="text-xs font-medium tabular-nums text-muted" aria-hidden="true">
+        {{ form.controls.name.value.length }} / {{ nameMaxLength }}
+      </span>
+    </div>
+
+    <input
+      class="form-input col-start-2 row-start-2"
+      id="space-name"
+      type="text"
+      formControlName="name"
+      placeholder="Например, JavaScript"
+      [maxlength]="nameMaxLength"
+      [attr.aria-invalid]="showNameError ? 'true' : null"
+      [attr.aria-describedby]="showNameError ? 'space-name-error' : null"
+    />
+
+    @if (showNameError) {
+      <p id="space-name-error" class="form-error col-start-2 row-start-3 px-3">
+        @if (form.controls.name.hasError('maxlength')) {
+          Не более {{ nameMaxLength }} символов
+        } @else {
+          Укажите название пространства
+        }
+      </p>
+    }
+  </div>
+
+  <app-space-icon-picker [control]="form.controls.icon" [color]="form.controls.color.value" />
+
+  <app-space-color-picker [control]="form.controls.color" />
+
+  <div class="flex justify-end flex-wrap gap-3">
+    <button class="button button--secondary" type="button" (click)="cancel()">Отмена</button>
+    <button class="button button--primary" type="submit" [disabled]="form.invalid || isUnchanged()">
+      {{ submitLabel }}
+    </button>
+  </div>
+</form>

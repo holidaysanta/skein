@@ -1,3 +1,14 @@
+@theme inline {
+  --color-app: var(--app);
+  --color-panel: var(--panel);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-hover: var(--hover);
+  --color-accent: var(--accent);
+  --color-error: var(--error);
+}
+
 /* Graphite (по умолчанию): нейтральный серый, фиолетовый акцент */
 /* :root без атрибута — запасной вариант, пока Angular не поставил data-theme */
 :where(:root),
@@ -11,6 +22,7 @@
   --hover: #373940;
   --accent: #a78bfa;
   --code: #e9d5ff;
+  --error: #f87171;
 }
 
 /* Midnight: холодный синеватый фон, циановый акцент, жёлтый код (в духе One Dark) */
@@ -23,6 +35,7 @@
   --hover: #2c3242;
   --accent: #00b4d8;
   --code: #e5c07b;
+  --error: #f87171;
 }
 
 /* Macchiato: индиговый фон, текст и акценты из палитры Catppuccin Macchiato */
@@ -35,4 +48,5 @@
   --hover: #494d64;
   --accent: #8aadf4;
   --code: #f5bde6;
+  --error: #f87171;
 }

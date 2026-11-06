@@ -1,0 +1,19 @@
+<fieldset>
+  <legend class="form-label mb-3">Цвет</legend>
+
+  <div class="flex flex-wrap gap-3">
+    @for (color of colors; track color) {
+      <label>
+        <input
+          type="radio"
+          name="color"
+          [formControl]="control()"
+          [value]="color"
+          [style.--space-color]="colorValues[color]"
+          class="color-option"
+        />
+        <span class="sr-only">{{ colorLabels[color] }}</span>
+      </label>
+    }
+  </div>
+</fieldset>

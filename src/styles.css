@@ -1,20 +1,42 @@
 @import 'tailwindcss';
-@import './themes.css';
+@import './styles/themes.css';
+@import './styles/controls.css';
+@import '@angular/cdk/overlay-prebuilt.css';
 @import '@milkdown/crepe/theme/common/style.css';
 @import '@milkdown/crepe/theme/frame-dark.css';
 @import './app/shared/markdown-editor/markdown-editor.theme.css';
+@import './app/features/spaces/space-button.css';
 
-@theme inline {
-  --color-app: var(--app);
-  --color-panel: var(--panel);
-  --color-fg: var(--fg);
-  --color-muted: var(--muted);
-  --color-line: var(--line);
-  --color-hover: var(--hover);
-  --color-accent: var(--accent);
+.app-dialog {
+  @apply bg-panel rounded-2xl border border-line p-6;
 }
 
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--line) transparent;
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--line);
+  border-radius: 4px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: transparent;
+  }
+  *:hover {
+    scrollbar-color: var(--line) transparent;
+  }
 }

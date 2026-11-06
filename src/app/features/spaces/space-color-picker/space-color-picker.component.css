@@ -1,0 +1,8 @@
+@reference "../../../../styles.css";
+
+.color-option {
+  @apply size-8 appearance-none rounded-full cursor-pointer bg-(--space-color);
+  @apply checked:ring-2 checked:ring-(--space-color) checked:ring-offset-2 checked:ring-offset-panel;
+  @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fg;
+  @apply transition-shadow duration-200 motion-reduce:transition-none;
+}

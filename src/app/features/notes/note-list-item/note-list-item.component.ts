@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { Note } from '../note.model';
+import { Note } from '../../../data/note.model';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MarkdownToPlainPipe } from '../../../shared/markdown-to-plain/markdown-to-plain.pipe';
 
@@ -12,5 +12,6 @@ import { MarkdownToPlainPipe } from '../../../shared/markdown-to-plain/markdown-
 })
 export class NoteListItemComponent {
   readonly note = input.required<Note>();
-  readonly deleted = output<void>();
+  readonly removeLabel = input.required<string>();
+  readonly removeRequested = output<void>();
 }

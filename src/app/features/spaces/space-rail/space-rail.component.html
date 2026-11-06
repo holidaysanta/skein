@@ -1,0 +1,21 @@
+<nav class="flex flex-col items-center gap-3 p-2" aria-label="Пространства">
+  <a
+    routerLink="/notes"
+    routerLinkActive
+    ariaCurrentWhenActive="page"
+    class="space-button"
+    title="Все заметки"
+    aria-label="Все заметки"
+    style="--space-color: var(--accent)"
+    draggable="false"
+    >☰</a
+  >
+
+  <hr class="w-6 rounded-full border-line" />
+
+  @for (space of spacesStore.spaces(); track space.id) {
+    <app-space-rail-item [space]="space" />
+  }
+
+  <button type="button" (click)="openCreateSpaceDialog()">+</button>
+</nav>
