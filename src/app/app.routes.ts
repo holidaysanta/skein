@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { spaceExistsGuard } from './features/spaces/space-exists.guard';
 
 export const routes: Routes = [
   {
@@ -12,6 +13,7 @@ export const routes: Routes = [
       },
       {
         path: 'spaces/:spaceId',
+        canActivate: [spaceExistsGuard],
         children: [
           { path: '', redirectTo: 'notes', pathMatch: 'full' },
           {
