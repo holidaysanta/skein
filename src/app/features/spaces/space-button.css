@@ -13,7 +13,8 @@
   --tw-ring-offset-color: var(--space-button-ring-offset, var(--app));
 }
 
-/* Фокус скрытой радиокнопки показываем на её плитке */
+/* Фокус ссылки или скрытой радиокнопки */
+.space-button:focus-visible,
 .space-button:has(input:focus-visible) {
-  @apply outline-2 outline-offset-4 outline-current;
+  @apply outline-2 -outline-offset-2 outline-fg;
 }

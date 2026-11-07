@@ -8,8 +8,11 @@
     aria-label="Все заметки"
     style="--space-color: var(--accent)"
     draggable="false"
-    >☰</a
   >
+    <svg width="24" height="24" aria-hidden="true">
+      <use href="/icons.svg#notebook-text" />
+    </svg>
+  </a>
 
   <hr class="w-6 rounded-full border-line" />
 
@@ -17,5 +20,14 @@
     <app-space-rail-item [space]="space" />
   }
 
-  <button type="button" (click)="openCreateSpaceDialog()">+</button>
+  <button
+    class="button button--icon rounded-full border border-dashed bg-transparent text-muted hover:border-accent hover:bg-accent/10 hover:text-accent"
+    type="button"
+    aria-label="Создать пространство"
+    (click)="openCreateSpaceDialog()"
+  >
+    <svg width="24" height="24" aria-hidden="true">
+      <use href="/icons.svg#plus" />
+    </svg>
+  </button>
 </nav>

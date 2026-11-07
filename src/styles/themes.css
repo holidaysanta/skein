@@ -2,11 +2,14 @@
   --color-app: var(--app);
   --color-panel: var(--panel);
   --color-fg: var(--fg);
+  --color-accent-fg: var(--accent-fg);
+  --color-danger-fg: var(--danger-fg);
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-hover: var(--hover);
   --color-accent: var(--accent);
   --color-error: var(--error);
+  --color-danger: var(--danger);
 }
 
 /* Graphite (по умолчанию): нейтральный серый, фиолетовый акцент */
@@ -17,12 +20,15 @@
   --app: #141416;
   --panel: #1d1d20;
   --fg: #f1f5f9;
+  --accent-fg: #141416;
+  --danger-fg: #141416;
   --muted: #8a8d93;
   --line: #2b2c31;
   --hover: #373940;
   --accent: #a78bfa;
   --code: #e9d5ff;
   --error: #f87171;
+  --danger: #f87171;
 }
 
 /* Midnight: холодный синеватый фон, циановый акцент, жёлтый код (в духе One Dark) */
@@ -30,12 +36,15 @@
   --app: #0f1115;
   --panel: #161920;
   --fg: #e2e8f0;
+  --accent-fg: #0f1115;
+  --danger-fg: #0f1115;
   --muted: #626e82;
   --line: #222733;
   --hover: #2c3242;
   --accent: #00b4d8;
   --code: #e5c07b;
   --error: #f87171;
+  --danger: #f87171;
 }
 
 /* Macchiato: индиговый фон, текст и акценты из палитры Catppuccin Macchiato */
@@ -43,10 +52,13 @@
   --app: #11121d;
   --panel: #1e2030;
   --fg: #cad3f5;
+  --accent-fg: #11121d;
+  --danger-fg: #11121d;
   --muted: #939ab7;
   --line: #2a2e46;
   --hover: #494d64;
   --accent: #8aadf4;
   --code: #f5bde6;
   --error: #f87171;
+  --danger: #f87171;
 }
