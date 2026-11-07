@@ -15,6 +15,7 @@ import { filter } from 'rxjs';
 import { LibraryFacade } from '../../data/library.facade';
 import { Dialog } from '@angular/cdk/dialog';
 import { CdkMenuModule } from '@angular/cdk/menu';
+import { STANDARD_DROPDOWN_BELOW_POSITIONS } from '@angular/cdk/overlay';
 import { CreateNoteDialogComponent } from './create-note-dialog/create-note-dialog.component';
 import { SpacesStore } from '../../data/spaces.store';
 import { SpaceBadgeComponent } from '../../shared/space-badge/space-badge.component';
@@ -27,6 +28,8 @@ import {
   SpaceFormDialogComponent,
   SpaceFormDialogData,
 } from '../spaces/space-form-dialog/space-form-dialog.component';
+import { I18nPluralPipe } from '@angular/common';
+import { SPACE_COLOR_VALUES } from '../../shared/space-colors';
 
 @Component({
   selector: 'app-notes',
@@ -36,6 +39,7 @@ import {
     ThemePickerComponent,
     SpaceBadgeComponent,
     CdkMenuModule,
+    I18nPluralPipe,
   ],
   templateUrl: './notes.component.html',
   styleUrl: './notes.component.scss',
@@ -55,8 +59,29 @@ export class NotesComponent {
 
   protected readonly visibleNotes = this.library.notesForSpace(this.spaceId);
 
+  protected readonly noteCount = computed(() => this.visibleNotes().length);
+
+  protected readonly noteCountLabels = {
+    one: '# заметка',
+    few: '# заметки',
+    many: '# заметок',
+  };
+
   protected readonly currentSpace = computed(() => {
     return this.spaceStore.spaces().find((space) => space.id === this.spaceId());
+  });
+
+  protected readonly spaceColorValue = computed(() => {
+    const space = this.currentSpace();
+
+    return space ? SPACE_COLOR_VALUES[space.color] : 'var(--accent)';
+  });
+
+  protected readonly menuPosition = STANDARD_DROPDOWN_BELOW_POSITIONS.map((position) => {
+    return {
+      ...position,
+      offsetY: position.overlayY === 'top' ? 8 : -8,
+    };
   });
 
   constructor() {

@@ -3,38 +3,48 @@
     <div class="flex items-center gap-3 p-4">
       <app-space-badge [icon]="space.icon" [color]="space.color" />
 
-      <h2 class="min-w-0 flex-1 wrap-break-word font-semibold">{{ space.name }}</h2>
+      <div class="min-w-0 flex-1">
+        <h2 class="wrap-break-word font-semibold">{{ space.name }}</h2>
+        <p class="mt-1 text-sm text-muted select-none">
+          {{ noteCount() | i18nPlural: noteCountLabels }}
+        </p>
+      </div>
 
       <button
-        class="button button--secondary shrink-0 px-3"
+        class="button button--secondary button--icon rounded-full"
         type="button"
         aria-label="Действия пространства"
+        [cdkMenuPosition]="menuPosition"
         [cdkMenuTriggerFor]="spaceMenu"
       >
-        ...
+        <svg width="16" height="16" class="shrink-0" aria-hidden="true">
+          <use href="/icons.svg#ellipsis" />
+        </svg>
       </button>
 
       <ng-template #spaceMenu>
-        <div
-          cdkMenu
-          aria-label="Действия пространства"
-          class="flex min-w-44 flex-col rounded-xl border border-line bg-panel p-1 shadow-lg"
-        >
+        <div cdkMenu aria-label="Действия пространства" class="menu">
           <button
             cdkMenuItem
             type="button"
-            class="rounded-lg px-3 py-2 text-left hover:bg-hover focus:bg-hover"
+            class="menu-item"
             (cdkMenuItemTriggered)="openEditSpaceDialog(space)"
           >
-            Редактировать пространство
+            <svg width="16" height="16" class="shrink-0" aria-hidden="true">
+              <use href="/icons.svg#pencil" />
+            </svg>
+            Редактировать
           </button>
           <button
             cdkMenuItem
             type="button"
-            class="rounded-lg px-3 py-2 text-left text-error hover:bg-hover focus:bg-hover"
+            class="menu-item menu-item--danger"
             (cdkMenuItemTriggered)="openDeleteSpaceDialog(space)"
           >
-            Удалить пространство
+            <svg width="16" height="16" class="shrink-0" aria-hidden="true">
+              <use href="/icons.svg#trash" />
+            </svg>
+            Удалить
           </button>
         </div>
       </ng-template>
@@ -44,8 +54,15 @@
   }
 
   <div class="p-4">
-    <button type="button" class="button button--primary" (click)="openCreateNoteDialog()">
-      Добавить новую заметку
+    <button
+      type="button"
+      class="button button--secondary w-full justify-start"
+      (click)="openCreateNoteDialog()"
+    >
+      <svg width="16" height="16" [style.color]="spaceColorValue()" aria-hidden="true">
+        <use href="/icons.svg#plus" />
+      </svg>
+      Новая заметка
     </button>
   </div>
 
@@ -57,7 +74,9 @@
         (removeRequested)="removeNote(note.id)"
       />
     } @empty {
-      <p class="px-2 text-muted">У вас нет ни одной заметки</p>
+      <p class="p-3 text-center text-sm leading-relaxed text-balance text-muted select-none">
+        {{ spaceId() ? 'Тема есть. Соберём главное?' : 'Сюда – всё, что хочется запомнить' }}
+      </p>
     }
   </nav>
 
@@ -65,5 +84,5 @@
 </aside>
 
 <main #scrollContainer class="min-w-0 flex-1 overflow-y-auto">
-  <router-outlet />
+  <router-outlet [routerOutletData]="noteCount()" />
 </main>
