@@ -1,5 +1,5 @@
 import { Injectable, signal, effect } from '@angular/core';
-import { Note } from './note.model';
+import { Note, NoteChanges } from './note.model';
 import { loadList } from '../core/storage';
 
 const STORAGE_KEY = 'skein.notes';
@@ -31,7 +31,7 @@ export class NotesStore {
     this._notes.update((notes) => [...notes, note]);
   }
 
-  updateNote(id: string, changes: Partial<Note>): void {
+  updateNote(id: string, changes: NoteChanges): void {
     this._notes.update((notes) =>
       notes.map((note) => (note.id === id ? { ...note, ...changes } : note))
     );

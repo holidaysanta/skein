@@ -8,7 +8,7 @@ import {
   ChangeDetectionStrategy,
   viewChild,
 } from '@angular/core';
-import { Note, NOTE_TITLE_MAX_LENGTH } from '../../../data/note.model';
+import { NOTE_TITLE_MAX_LENGTH, NoteChanges } from '../../../data/note.model';
 import { MarkdownEditorComponent } from '../../../shared/markdown-editor/markdown-editor.component';
 import { NavigationStart, Router } from '@angular/router';
 import { filter } from 'rxjs';
@@ -49,7 +49,7 @@ export class NoteDetailComponent {
       .subscribe(() => this.markdownEditor()?.flush());
   }
 
-  protected updateNote(changes: Partial<Note>): void {
+  protected updateNote(changes: NoteChanges): void {
     this.library.updateNote(this.id(), changes);
   }
 }

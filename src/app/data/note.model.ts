@@ -5,3 +5,5 @@ export interface Note {
   title: string;
   text: string;
 }
+
+export type NoteChanges = Partial<Pick<Note, 'text' | 'title'>>;
