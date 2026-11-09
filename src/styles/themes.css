@@ -10,6 +10,8 @@
   --color-accent: var(--accent);
   --color-error: var(--error);
   --color-danger: var(--danger);
+  --color-raised: var(--raised);
+  --shadow-raised: var(--control-shadow), inset 0 1px 0 var(--edge-highlight);
 }
 
 /* Graphite (по умолчанию): нейтральный серый, фиолетовый акцент */
@@ -17,18 +19,22 @@
 :where(:root),
 [data-theme='graphite'] {
   color-scheme: dark;
-  --app: #141416;
-  --panel: #1d1d20;
+  --app: #18181b;
+  --panel: #242428;
   --fg: #f1f5f9;
   --accent-fg: #141416;
   --danger-fg: #141416;
-  --muted: #8a8d93;
-  --line: #2b2c31;
-  --hover: #373940;
+  --muted: #a5a5af;
+  --line: #38383f;
+  --hover: #33333b;
   --accent: #a78bfa;
   --code: #e9d5ff;
   --error: #f87171;
   --danger: #f87171;
+
+  --raised: #303138;
+  --control-shadow: 0 3px 7px -4px rgb(0 0 0 / 56%);
+  --edge-highlight: color-mix(in srgb, var(--fg) 5%, transparent);
 }
 
 /* Midnight: холодный синеватый фон, циановый акцент, жёлтый код (в духе One Dark) */
