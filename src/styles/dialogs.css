@@ -2,6 +2,7 @@
   .app-dialog {
     @apply bg-raised rounded-2xl border border-line p-6;
     @apply shadow-overlay;
+    @apply overflow-y-auto;
   }
 
   .dialog-title {
