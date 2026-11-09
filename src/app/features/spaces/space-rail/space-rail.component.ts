@@ -11,7 +11,6 @@ import { SpaceDraft } from '../../../data/space.model';
   selector: 'app-space-rail',
   imports: [SpaceRailItemComponent, RouterLink, RouterLinkActive],
   templateUrl: './space-rail.component.html',
-  styleUrl: './space-rail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'flex' },
 })

@@ -7,7 +7,6 @@ import { SPACE_COLOR_VALUES } from '../../../shared/space-colors';
   selector: 'app-space-rail-item',
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './space-rail-item.component.html',
-  styleUrl: './space-rail-item.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpaceRailItemComponent {

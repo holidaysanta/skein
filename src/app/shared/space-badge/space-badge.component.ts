@@ -6,7 +6,6 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
   selector: 'app-space-badge',
   imports: [],
   templateUrl: './space-badge.component.html',
-  styleUrl: './space-badge.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpaceBadgeComponent {

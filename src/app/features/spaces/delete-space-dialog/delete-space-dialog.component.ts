@@ -8,7 +8,6 @@ export type DeleteSpaceDialogData = Pick<Space, 'name'>;
   selector: 'app-delete-space-dialog',
   imports: [],
   templateUrl: './delete-space-dialog.component.html',
-  styleUrl: './delete-space-dialog.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteSpaceDialogComponent {
