@@ -1,0 +1,19 @@
+@reference "../../../../styles.css";
+
+.icon-option {
+  @apply flex size-10 items-center justify-center select-none;
+  @apply rounded-[50%] bg-panel text-(--space-color);
+  @apply hover:bg-(--space-color)/10;
+  @apply transition-[color,border-radius,background-color,box-shadow] duration-200;
+  @apply motion-reduce:transition-none;
+}
+
+.icon-option:has(input:checked) {
+  @apply rounded-xl bg-(--space-color)/20;
+  @apply ring-2 ring-(--space-color) ring-offset-2;
+  --tw-ring-offset-color: var(--icon-option-ring-offset, var(--app));
+}
+
+.icon-option:has(input:focus-visible) {
+  @apply outline-2 -outline-offset-2 outline-fg;
+}

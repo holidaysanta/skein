@@ -1,5 +1,5 @@
 <a
-  class="space-button"
+  class="space-rail-link"
   routerLinkActive
   ariaCurrentWhenActive="page"
   draggable="false"
@@ -11,4 +11,6 @@
   <svg width="24" height="24" aria-hidden="true">
     <use [attr.href]="'/icons.svg#' + space().icon" />
   </svg>
+
+  <span class="space-rail-label">{{ space().name }}</span>
 </a>
