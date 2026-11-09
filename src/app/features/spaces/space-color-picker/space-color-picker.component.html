@@ -3,15 +3,19 @@
 
   <div class="flex flex-wrap gap-3">
     @for (color of colors; track color) {
-      <label>
+      <label class="color-option" [style.--space-color]="colorValues[color]">
         <input
           type="radio"
           name="color"
+          class="sr-only"
           [formControl]="control()"
           [value]="color"
-          [style.--space-color]="colorValues[color]"
-          class="color-option"
         />
+
+        <svg class="color-option-check" width="16" height="16" aria-hidden="true">
+          <use href="/icons.svg#check" />
+        </svg>
+
         <span class="sr-only">{{ colorLabels[color] }}</span>
       </label>
     }

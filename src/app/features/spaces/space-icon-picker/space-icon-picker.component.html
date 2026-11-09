@@ -1,12 +1,12 @@
 <fieldset [style.--space-color]="colorValue()">
   <legend class="form-label mb-3">Иконка</legend>
 
-  <div class="flex flex-wrap gap-3 [--space-button-ring-offset:var(--panel)]">
+  <div class="grid grid-cols-4 @sm:grid-cols-8 justify-items-center gap-1.5">
     @for (icon of icons; track icon) {
-      <label class="space-button cursor-pointer" [title]="iconLabels[icon]">
+      <label class="icon-option cursor-pointer" [title]="iconLabels[icon]">
         <input class="sr-only" type="radio" name="icon" [formControl]="control()" [value]="icon" />
 
-        <svg width="24" height="24" aria-hidden="true">
+        <svg width="19" height="19" aria-hidden="true">
           <use [attr.href]="'/icons.svg#' + icon" />
         </svg>
 

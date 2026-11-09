@@ -26,7 +26,6 @@ export interface SpaceFormDialogData {
     SpaceBadgeComponent,
   ],
   templateUrl: './space-form-dialog.component.html',
-  styleUrl: './space-form-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpaceFormDialogComponent {

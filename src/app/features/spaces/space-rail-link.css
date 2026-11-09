@@ -1,0 +1,52 @@
+@layer components {
+  .space-rail-link {
+    @apply relative flex size-12 items-center justify-center pb-2 select-none;
+    @apply rounded-2xl bg-transparent text-muted;
+    @apply transition-[color,background-color,box-shadow,translate] duration-200;
+    @apply motion-safe:hover:-translate-y-0.5;
+    @apply motion-reduce:transition-none;
+    @apply hover:bg-raised hover:text-fg;
+
+    @variant hover, aria-[current=page] {
+      @apply shadow-raised;
+    }
+
+    @variant hover {
+      .space-rail-label {
+        @apply bg-hover border-muted;
+      }
+    }
+  }
+
+  .space-rail-link[aria-current='page'] {
+    @apply bg-(--space-color)/15 text-(--space-color);
+
+    @variant hover {
+      background: color-mix(in srgb, var(--space-color) 15%, var(--raised));
+    }
+  }
+
+  .space-rail-link[aria-current='page']::before {
+    content: '';
+    @apply absolute -left-1.75 top-3 w-0.75 h-5;
+    @apply rounded-full bg-(--space-color);
+  }
+
+  .space-rail-link:focus-visible {
+    @apply outline-2 outline-offset-2 outline-fg;
+  }
+
+  .space-rail-label {
+    @apply absolute left-1/2 -bottom-1.5 -translate-x-1/2;
+    @apply w-max min-w-7.5 max-w-27 truncate;
+    @apply h-4.75 rounded-md border border-line/65 bg-raised px-1.5;
+    @apply text-[11.5px] leading-4.25 font-normal text-center text-fg;
+    @apply transition-colors duration-200 motion-reduce:transition-none;
+  }
+
+  .space-rail-link[aria-current='page'] .space-rail-label {
+    @apply font-medium text-(--space-color);
+    background: color-mix(in srgb, var(--space-color) 11%, var(--raised));
+    border-color: color-mix(in srgb, var(--space-color) 45%, var(--line));
+  }
+}

@@ -3,11 +3,11 @@
 @import './styles/controls.css';
 @import './styles/dialogs.css';
 @import './styles/menu.css';
+@import './app/features/spaces/space-rail-link.css';
 @import '@angular/cdk/overlay-prebuilt.css';
 @import '@milkdown/crepe/theme/common/style.css';
 @import '@milkdown/crepe/theme/frame-dark.css';
 @import './app/shared/markdown-editor/markdown-editor.theme.css';
-@import './app/features/spaces/space-button.css';
 
 /* Chrome, Edge, Safari */
 ::-webkit-scrollbar {
