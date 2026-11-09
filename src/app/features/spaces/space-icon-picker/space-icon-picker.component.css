@@ -1,19 +1,24 @@
 @reference "../../../../styles.css";
 
 .icon-option {
-  @apply flex size-10 items-center justify-center select-none;
-  @apply rounded-[50%] bg-panel text-(--space-color);
-  @apply hover:bg-(--space-color)/10;
-  @apply transition-[color,border-radius,background-color,box-shadow] duration-200;
-  @apply motion-reduce:transition-none;
+  @apply relative flex h-10 w-full max-w-12 items-center justify-center select-none;
+  @apply rounded-xl bg-transparent text-muted;
+  @apply hover:bg-hover hover:text-fg;
+  @apply transition-[color,background-color,box-shadow,translate] duration-150;
+  @apply motion-safe:hover:-translate-y-0.25 motion-reduce:transition-none;
 }
 
 .icon-option:has(input:checked) {
-  @apply rounded-xl bg-(--space-color)/20;
-  @apply ring-2 ring-(--space-color) ring-offset-2;
-  --tw-ring-offset-color: var(--icon-option-ring-offset, var(--app));
+  @apply bg-(--space-color)/15 text-(--space-color);
+  @apply shadow-raised;
+}
+
+.icon-option:has(input:checked)::after {
+  content: '';
+  @apply absolute inset-x-3.75 bottom-0.75 h-0.5;
+  @apply rounded-full bg-(--space-color);
 }
 
 .icon-option:has(input:focus-visible) {
-  @apply outline-2 -outline-offset-2 outline-fg;
+  @apply outline-2 outline-offset-2 outline-fg;
 }

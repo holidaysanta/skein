@@ -1,6 +1,7 @@
 @layer components {
   .app-dialog {
-    @apply bg-panel rounded-2xl border border-line p-6;
+    @apply bg-raised rounded-2xl border border-line p-6;
+    @apply shadow-overlay;
   }
 
   .dialog-title {

@@ -1,4 +1,4 @@
-<form (ngSubmit)="submit()" [formGroup]="form" class="flex w-full max-w-lg flex-col gap-6">
+<form (ngSubmit)="submit()" [formGroup]="form" class="flex w-104 max-w-full flex-col gap-6">
   <h2 id="space-form-title" class="dialog-title">{{ title }}</h2>
 
   @let showNameError = form.controls.name.invalid && form.controls.name.touched;
