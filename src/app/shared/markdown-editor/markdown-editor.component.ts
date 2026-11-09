@@ -29,7 +29,7 @@ export class MarkdownEditorComponent {
   private readonly isReady = signal(false);
 
   private crepe?: Crepe;
-  private lastEmitted = '';
+  private lastSyncedValue = '';
 
   constructor() {
     // afterNextRender выполняется вне зоны Angular, поэтому события Milkdown не запускают проверку изменений
@@ -45,7 +45,7 @@ export class MarkdownEditorComponent {
         },
       });
 
-      this.lastEmitted = this.value();
+      this.lastSyncedValue = this.value();
 
       this.crepe.on((listener) => {
         listener.markdownUpdated((_ctx, markdown) => {
@@ -62,9 +62,9 @@ export class MarkdownEditorComponent {
 
     effect(() => {
       const value = this.value();
-      if (!this.isReady() || value === this.lastEmitted) return;
+      if (!this.isReady() || value === this.lastSyncedValue) return;
 
-      this.lastEmitted = value;
+      this.lastSyncedValue = value;
       this.crepe!.editor.action(replaceAll(value, true));
     });
 
@@ -72,9 +72,9 @@ export class MarkdownEditorComponent {
   }
 
   private emitIfChanged(markdown: string): void {
-    if (markdown === this.lastEmitted) return;
+    if (markdown === this.lastSyncedValue) return;
 
-    this.lastEmitted = markdown;
+    this.lastSyncedValue = markdown;
     this.changed.emit(markdown);
   }
 

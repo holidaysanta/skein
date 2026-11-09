@@ -1,0 +1,13 @@
+@layer components {
+  .app-dialog {
+    @apply bg-panel rounded-2xl border border-line p-6;
+  }
+
+  .dialog-title {
+    @apply text-xl font-semibold;
+  }
+
+  .dialog-actions {
+    @apply flex flex-wrap justify-end gap-3;
+  }
+}

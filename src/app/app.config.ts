@@ -1,6 +1,7 @@
 import {
   ApplicationConfig,
   inject,
+  LOCALE_ID,
   provideAppInitializer,
   provideZoneChangeDetection,
 } from '@angular/core';
@@ -14,10 +15,14 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withComponentInputBinding()),
+
     {
       provide: DEFAULT_DIALOG_CONFIG,
       useValue: { ...new DialogConfig(), panelClass: 'app-dialog' },
     },
+
+    { provide: LOCALE_ID, useValue: 'ru' },
+
     provideAppInitializer(() => {
       inject(ThemeStore);
     }),

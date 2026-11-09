@@ -1,5 +1,5 @@
 <form (ngSubmit)="submit()" class="flex flex-col gap-4">
-  <h2>Новая заметка</h2>
+  <h2 class="dialog-title">Новая заметка</h2>
 
   <input
     name="title"
@@ -9,7 +9,7 @@
     placeholder="Заголовок"
   />
 
-  <div class="flex w-full justify-end gap-4">
+  <div class="dialog-actions">
     <button class="button button--secondary" type="button" (click)="cancel()">Отмена</button>
     <button class="button button--primary" type="submit">Создать</button>
   </div>

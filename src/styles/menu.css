@@ -1,0 +1,17 @@
+@layer components {
+  .menu {
+    @apply flex min-w-44 flex-col gap-1 rounded-2xl border border-line;
+    @apply bg-panel p-1.5 text-sm text-fg shadow-lg;
+  }
+
+  .menu-item {
+    @apply flex min-h-9 items-center gap-2 rounded-xl px-3 py-1.5 text-left cursor-pointer;
+    @apply hover:bg-hover focus-visible:bg-hover;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+
+  .menu-item--danger {
+    @apply text-danger hover:bg-danger/10 focus-visible:bg-danger/10;
+    @apply focus-visible:outline-danger;
+  }
+}

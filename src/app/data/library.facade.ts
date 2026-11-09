@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, Signal } from '@angular/core';
 import { NotesStore } from './notes.store';
 import { SpacesStore } from './spaces.store';
-import { Note } from './note.model';
+import { Note, NoteChanges } from './note.model';
 import { SpaceColor, SpaceDraft, SpaceIcon } from './space.model';
 
 /**
@@ -39,7 +39,7 @@ export class LibraryFacade {
     return id;
   }
 
-  updateNote(id: string, changes: Partial<Note>): void {
+  updateNote(id: string, changes: NoteChanges): void {
     this.notesStore.updateNote(id, changes);
   }
 
