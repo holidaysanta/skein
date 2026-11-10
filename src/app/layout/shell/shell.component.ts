@@ -6,7 +6,6 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-shell',
   imports: [SpaceRailComponent, RouterOutlet],
   templateUrl: './shell.component.html',
-  styleUrl: './shell.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'flex h-dvh p-3 gap-3' },
 })

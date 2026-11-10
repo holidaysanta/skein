@@ -3,16 +3,24 @@
 
   <div class="flex flex-wrap gap-3">
     @for (color of colors; track color) {
-      <label class="color-option" [style.--space-color]="colorValues[color]">
+      <label
+        class="inline-flex size-8 cursor-pointer items-center justify-center rounded-full bg-(--space-color) shadow-raised transition-[box-shadow,translate] duration-150 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-fg motion-safe:hover:-translate-y-0.25 motion-reduce:transition-none"
+        [style.--space-color]="colorValues[color]"
+      >
         <input
           type="radio"
           name="color"
-          class="sr-only"
+          class="peer sr-only"
           [formControl]="control()"
           [value]="color"
         />
 
-        <svg class="color-option-check" width="16" height="16" aria-hidden="true">
+        <svg
+          class="text-space-fg opacity-0 peer-checked:opacity-100"
+          width="16"
+          height="16"
+          aria-hidden="true"
+        >
           <use href="/icons.svg#check" />
         </svg>
 

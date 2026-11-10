@@ -42,7 +42,6 @@ import { SPACE_COLOR_VALUES } from '../../shared/space-colors';
     I18nPluralPipe,
   ],
   templateUrl: './notes.component.html',
-  styleUrl: './notes.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'flex flex-1 min-w-0' },
 })

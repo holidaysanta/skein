@@ -8,7 +8,6 @@ import { SPACE_COLOR_VALUES } from '../../../shared/space-colors';
   selector: 'app-space-icon-picker',
   imports: [ReactiveFormsModule],
   templateUrl: './space-icon-picker.component.html',
-  styleUrl: './space-icon-picker.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'block @container' },
 })

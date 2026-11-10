@@ -7,7 +7,6 @@ import { NOTE_TITLE_MAX_LENGTH } from '../../../data/note.model';
   selector: 'app-create-note-dialog',
   imports: [FormsModule],
   templateUrl: './create-note-dialog.component.html',
-  styleUrl: './create-note-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateNoteDialogComponent {

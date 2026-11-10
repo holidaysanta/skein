@@ -1,76 +1,107 @@
 @theme inline {
+  /* Поверхности */
   --color-app: var(--app);
   --color-panel: var(--panel);
+  --color-raised: var(--raised);
+  --color-hover: var(--hover);
+
+  /* Текст */
   --color-fg: var(--fg);
+  --color-muted: var(--muted);
   --color-accent-fg: var(--accent-fg);
   --color-danger-fg: var(--danger-fg);
   --color-space-fg: var(--space-fg);
-  --color-muted: var(--muted);
+
+  /* Контуры */
   --color-line: var(--line);
-  --color-hover: var(--hover);
+
+  /* Акценты и состояния */
   --color-accent: var(--accent);
   --color-error: var(--error);
   --color-danger: var(--danger);
-  --color-raised: var(--raised);
-  --shadow-raised: var(--control-shadow), inset 0 1px 0 var(--edge-highlight);
 
+  /* Тени */
+  --shadow-raised: var(--control-shadow), inset 0 1px 0 var(--edge-highlight);
   --shadow-overlay: var(--overlay-shadow), inset 0 1px 0 var(--edge-highlight);
+}
+
+/* Общие настройки тем */
+:where(:root, [data-theme]) {
+  color-scheme: dark;
+
+  --space-fg: #141416;
+  --error: #f87171;
+  --danger: #f87171;
+
+  --control-shadow: 0 3px 7px -4px rgb(0 0 0 / 56%);
+  --overlay-shadow: 0 22px 60px -20px rgb(0 0 0 / 60%), 0 4px 12px -6px rgb(0 0 0 / 45%);
+  --edge-highlight: color-mix(in srgb, var(--fg) 5%, transparent);
 }
 
 /* Graphite (по умолчанию): нейтральный серый, фиолетовый акцент */
 /* :root без атрибута — запасной вариант, пока Angular не поставил data-theme */
 :where(:root),
 [data-theme='graphite'] {
-  color-scheme: dark;
+  /* Поверхности */
   --app: #18181b;
   --panel: #242428;
+  --raised: #303138;
+  --hover: #33333b;
+
+  /* Текст */
   --fg: #f1f5f9;
+  --muted: #a5a5af;
   --accent-fg: #141416;
   --danger-fg: #141416;
-  --space-fg: #141416;
-  --muted: #a5a5af;
-  --line: #38383f;
-  --hover: #33333b;
-  --accent: #a78bfa;
   --code: #e9d5ff;
-  --error: #f87171;
-  --danger: #f87171;
 
-  --overlay-shadow: 0 22px 60px -20px rgb(0 0 0 / 60%), 0 4px 12px -6px rgb(0 0 0 / 45%);
+  /* Контуры */
+  --line: #38383f;
 
-  --raised: #303138;
-  --control-shadow: 0 3px 7px -4px rgb(0 0 0 / 56%);
-  --edge-highlight: color-mix(in srgb, var(--fg) 5%, transparent);
+  /* Акценты и состояния */
+  --accent: #a78bfa;
 }
 
 /* Midnight: холодный синеватый фон, циановый акцент, жёлтый код (в духе One Dark) */
 [data-theme='midnight'] {
+  /* Поверхности */
   --app: #0f1115;
   --panel: #161920;
+  --raised: #242936;
+  --hover: #2c3242;
+
+  /* Текст */
   --fg: #e2e8f0;
+  --muted: #626e82;
   --accent-fg: #0f1115;
   --danger-fg: #0f1115;
-  --muted: #626e82;
-  --line: #222733;
-  --hover: #2c3242;
-  --accent: #00b4d8;
   --code: #e5c07b;
-  --error: #f87171;
-  --danger: #f87171;
+
+  /* Контуры */
+  --line: #222733;
+
+  /* Акценты и состояния */
+  --accent: #00b4d8;
 }
 
 /* Macchiato: индиговый фон, текст и акценты из палитры Catppuccin Macchiato */
 [data-theme='macchiato'] {
+  /* Поверхности */
   --app: #11121d;
   --panel: #1e2030;
+  --raised: #303347;
+  --hover: #494d64;
+
+  /* Текст */
   --fg: #cad3f5;
+  --muted: #939ab7;
   --accent-fg: #11121d;
   --danger-fg: #11121d;
-  --muted: #939ab7;
-  --line: #2a2e46;
-  --hover: #494d64;
-  --accent: #8aadf4;
   --code: #f5bde6;
-  --error: #f87171;
-  --danger: #f87171;
+
+  /* Контуры */
+  --line: #2a2e46;
+
+  /* Акценты и состояния */
+  --accent: #8aadf4;
 }
