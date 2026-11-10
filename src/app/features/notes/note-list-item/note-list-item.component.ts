@@ -7,7 +7,6 @@ import { MarkdownToPlainPipe } from '../../../shared/markdown-to-plain/markdown-
   selector: 'app-note-list-item',
   imports: [RouterLink, RouterLinkActive, MarkdownToPlainPipe],
   templateUrl: './note-list-item.component.html',
-  styleUrl: './note-list-item.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NoteListItemComponent {

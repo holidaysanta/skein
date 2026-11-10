@@ -19,7 +19,6 @@ import { LibraryFacade } from '../../../data/library.facade';
   selector: 'app-note-detail',
   imports: [FormsModule, MarkdownEditorComponent],
   templateUrl: './note-detail.component.html',
-  styleUrl: './note-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'mx-auto px-22 min-h-full max-w-5xl flex flex-col' },
 })

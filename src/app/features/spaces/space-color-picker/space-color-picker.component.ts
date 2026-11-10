@@ -7,7 +7,6 @@ import { SPACE_COLOR_LABELS, SPACE_COLOR_VALUES } from '../../../shared/space-co
   selector: 'app-space-color-picker',
   imports: [ReactiveFormsModule],
   templateUrl: './space-color-picker.component.html',
-  styleUrl: './space-color-picker.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpaceColorPickerComponent {
