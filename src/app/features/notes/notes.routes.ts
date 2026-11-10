@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { NotesComponent } from './notes.component';
 import { NotePlaceholderComponent } from './note-placeholder/note-placeholder.component';
-import { NoteDetailComponent } from './note-detail/note-detail.component';
 
 export const NOTES_ROUTES: Routes = [
   {
@@ -9,7 +8,11 @@ export const NOTES_ROUTES: Routes = [
     component: NotesComponent,
     children: [
       { path: '', component: NotePlaceholderComponent },
-      { path: ':id', component: NoteDetailComponent },
+      {
+        path: ':id',
+        loadComponent: () =>
+          import('./note-detail/note-detail.component').then((m) => m.NoteDetailComponent),
+      },
     ],
   },
 ];
