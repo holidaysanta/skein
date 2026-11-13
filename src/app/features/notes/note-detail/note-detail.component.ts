@@ -11,13 +11,16 @@ import {
 import { NOTE_TITLE_MAX_LENGTH, NoteChanges } from '../../../data/note.model';
 import { MarkdownEditorComponent } from '../../../shared/markdown-editor/markdown-editor.component';
 import { NavigationStart, Router } from '@angular/router';
-import { filter } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { filter, map, timer } from 'rxjs';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { LibraryFacade } from '../../../data/library.facade';
+import { EditorStylesService } from '../../../shared/markdown-editor/editor-styles.service';
+import { EditorLoadErrorComponent } from '../../../shared/markdown-editor/editor-load-error/editor-load-error.component';
+import { EditorLoadingComponent } from '../../../shared/markdown-editor/editor-loading/editor-loading.component';
 
 @Component({
   selector: 'app-note-detail',
-  imports: [FormsModule, MarkdownEditorComponent],
+  imports: [FormsModule, MarkdownEditorComponent, EditorLoadErrorComponent, EditorLoadingComponent],
   templateUrl: './note-detail.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'mx-auto px-22 min-h-full max-w-5xl flex flex-col' },
@@ -28,18 +31,29 @@ export class NoteDetailComponent {
   // Читаем из стора, меняем через фасад
   private readonly notesStore = inject(NotesStore);
   private readonly library = inject(LibraryFacade);
+  private readonly editorStyles = inject(EditorStylesService);
 
   readonly id = input.required<string>();
 
-  private readonly markdownEditor = viewChild(MarkdownEditorComponent);
+  private readonly markdownEditor = viewChild<MarkdownEditorComponent>('editor');
 
   protected readonly titleMaxLength = NOTE_TITLE_MAX_LENGTH;
 
+  protected readonly showLoadingIndicator = toSignal(timer(150).pipe(map(() => true)), {
+    initialValue: false,
+  });
+
   protected readonly note = computed(() => this.notesStore.notes().find((n) => n.id === this.id()));
+
+  protected readonly stylesLoadFailed = computed(() => {
+    return this.editorStyles.status() === 'error';
+  });
 
   // Досылаем текст до смены заметки: на NavigationStart id() ещё старый,
   // а уход с клавиатуры (Alt+←) не вызывает blur
   constructor() {
+    this.editorStyles.load();
+
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationStart),

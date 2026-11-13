@@ -29,7 +29,14 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.css"],
+            "styles": [
+              "src/styles.css",
+              {
+                "input": "src/app/shared/markdown-editor/markdown-editor.styles.css",
+                "bundleName": "editor",
+                "inject": false
+              }
+            ],
             "scripts": []
           },
           "configurations": {
@@ -44,6 +51,12 @@
                   "type": "anyComponentStyle",
                   "maximumWarning": "4kB",
                   "maximumError": "8kB"
+                },
+                {
+                  "type": "bundle",
+                  "name": "editor",
+                  "maximumWarning": "100kB",
+                  "maximumError": "120kB"
                 }
               ],
               "outputHashing": "all"

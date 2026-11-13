@@ -1,1 +1,10 @@
-<div #host class="flex flex-1 flex-col"></div>
+@if (hasError()) {
+  <app-editor-load-error />
+} @else {
+  <div class="relative flex flex-1 flex-col">
+    @if (isLoading() && showLoadingIndicator()) {
+      <app-editor-loading class="absolute inset-0" />
+    }
+    <div #host class="flex flex-1 flex-col" [class.invisible]="isLoading()"></div>
+  </div>
+}

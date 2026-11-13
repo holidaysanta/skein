@@ -9,7 +9,10 @@ export const NOTES_ROUTES: Routes = [
     component: NotesComponent,
     children: [
       { path: '', component: NotePlaceholderComponent },
-      { path: ':id', component: NoteDetailComponent },
+      {
+        path: ':id',
+        component: NoteDetailComponent,
+      },
     ],
   },
 ];

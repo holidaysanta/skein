@@ -1,0 +1,19 @@
+<div
+  class="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-error/10 text-error shadow-raised"
+>
+  <svg width="28" height="28" aria-hidden="true">
+    <use href="/icons.svg#circle-exclamation-point" />
+  </svg>
+</div>
+
+<div class="flex max-w-sm flex-col gap-1">
+  <h2 class="text-base font-semibold text-fg">Редактор не загрузился</h2>
+  <p class="text-sm leading-relaxed text-muted">Попробуйте обновить страницу</p>
+</div>
+
+<button class="button button--secondary mt-1" type="button" (click)="reloadPage()">
+  <svg width="18" height="18" aria-hidden="true">
+    <use href="/icons.svg#refresh-cw" />
+  </svg>
+  Обновить страницу
+</button>
