@@ -7,7 +7,23 @@
     placeholder="Заголовок"
   />
 
-  <app-markdown-editor [value]="n.text" class="flex-1" (changed)="updateNote({ text: $event })" />
+  @defer (on immediate) {
+    <app-markdown-editor
+      #editor
+      class="flex-1"
+      [showLoadingIndicator]="showLoadingIndicator()"
+      [value]="n.text"
+      (changed)="updateNote({ text: $event })"
+    />
+  } @loading {
+    @if (stylesLoadFailed()) {
+      <app-editor-load-error />
+    } @else if (showLoadingIndicator()) {
+      <app-editor-loading />
+    }
+  } @error {
+    <app-editor-load-error />
+  }
 } @else {
   <p>Заметка не найдена</p>
 }
