@@ -151,7 +151,9 @@ export class NotesComponent {
   }
 
   protected openCreateNoteDialog(): void {
-    const dialogRef = this.dialog.open<string>(CreateNoteDialogComponent);
+    const dialogRef = this.dialog.open<string>(CreateNoteDialogComponent, {
+      ariaLabelledBy: 'create-note-title',
+    });
 
     dialogRef.closed.subscribe((title) => {
       if (!title) return;

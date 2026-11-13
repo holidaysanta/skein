@@ -1,16 +1,40 @@
-<form (ngSubmit)="submit()" class="flex flex-col gap-4">
-  <h2 class="dialog-title">Новая заметка</h2>
+<form (ngSubmit)="submit()" [formGroup]="form" class="flex w-88 max-w-full flex-col gap-6">
+  <h2 id="create-note-title" class="dialog-title">Новая заметка</h2>
 
-  <input
-    name="title"
-    class="form-input"
-    [(ngModel)]="draftTitle"
-    [maxlength]="titleMaxLength"
-    placeholder="Заголовок"
-  />
+  @let showTitleError = form.controls.title.invalid && form.controls.title.touched;
+  <div class="flex flex-col gap-2">
+    <div class="flex items-center justify-between gap-3 px-3">
+      <label class="form-label" for="note-title">Заголовок </label>
+
+      <span class="text-xs font-medium text-muted tabular-nums" aria-hidden="true">
+        {{ form.controls.title.value.length }} / {{ titleMaxLength }}
+      </span>
+    </div>
+
+    <input
+      id="note-title"
+      name="title"
+      class="form-input"
+      formControlName="title"
+      placeholder="Например, замыкания"
+      [maxlength]="titleMaxLength"
+      [attr.aria-invalid]="showTitleError ? true : null"
+      [attr.aria-describedby]="showTitleError ? 'note-title-error' : null"
+    />
+
+    @if (showTitleError) {
+      <p id="note-title-error" class="form-error px-3">
+        @if (form.controls.title.hasError('maxlength')) {
+          Не более {{ titleMaxLength }} символов
+        } @else {
+          Укажите заголовок заметки
+        }
+      </p>
+    }
+  </div>
 
   <div class="dialog-actions">
     <button class="button button--secondary" type="button" (click)="cancel()">Отмена</button>
-    <button class="button button--primary" type="submit">Создать</button>
+    <button class="button button--primary" type="submit" [disabled]="form.invalid">Создать</button>
   </div>
 </form>
