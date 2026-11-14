@@ -71,7 +71,7 @@
       <app-note-list-item
         [note]="note"
         [removeLabel]="spaceId() ? 'Убрать из пространства' : 'Удалить заметку'"
-        (removeRequested)="removeNote(note.id)"
+        (removeRequested)="openRemoveNoteDialog(note)"
       />
     } @empty {
       <p class="p-3 text-center text-sm leading-relaxed text-balance text-muted select-none">

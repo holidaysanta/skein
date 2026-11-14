@@ -1,0 +1,20 @@
+<div class="flex w-full max-w-sm flex-col gap-4">
+  <h2 id="remove-note-title" class="dialog-title">{{ heading }}</h2>
+
+  <p class="text-sm leading-relaxed text-muted">
+    Заметка «<span class="font-medium wrap-break-word text-fg">{{
+      data.title || 'Без заголовка'
+    }}</span
+    >» {{ description }}
+  </p>
+
+  <div class="dialog-actions">
+    <button class="button button--secondary" type="button" (click)="cancel()">Отмена</button>
+
+    @if (data.action === 'unlink') {
+      <button class="button button--primary" type="button" (click)="confirm()">Убрать</button>
+    } @else {
+      <button class="button button--danger" type="button" (click)="confirm()">Удалить</button>
+    }
+  </div>
+</div>

@@ -1,10 +1,10 @@
 <div
-  class="relative flex items-center gap-2 rounded-xl pl-6 pr-4 py-2.5 hover:bg-hover"
+  class="relative flex items-center gap-2 rounded-xl py-2.5 pr-4 pl-6 hover:bg-hover"
   routerLinkActive="bg-hover"
 >
   <a [routerLink]="note().id" class="min-w-0 flex-1">
     <h3 class="truncate">{{ note().title || 'Без заголовка' }}</h3>
-    <p class="truncate text-xs text-muted font-medium">
+    <p class="truncate text-xs font-medium text-muted">
       {{ (note().text | markdownToPlain) || 'Пустая заметка' }}
     </p>
   </a>
@@ -15,6 +15,8 @@
     [attr.aria-label]="removeLabel()"
     [title]="removeLabel()"
   >
-    ✕
+    <svg width="16" height="16" aria-hidden="true">
+      <use href="/icons.svg#circle-minus" />
+    </svg>
   </button>
 </div>

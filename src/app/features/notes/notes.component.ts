@@ -30,6 +30,11 @@ import {
 } from '../spaces/space-form-dialog/space-form-dialog.component';
 import { I18nPluralPipe } from '@angular/common';
 import { SPACE_COLOR_VALUES } from '../../shared/space-colors';
+import {
+  RemoveNoteDialogComponent,
+  RemoveNoteDialogData,
+} from './remove-note-dialog/remove-note-dialog.component';
+import { Note } from '../../data/note.model';
 
 @Component({
   selector: 'app-notes',
@@ -93,25 +98,57 @@ export class NotesComponent {
       .subscribe(() => (this.scrollContainer().nativeElement.scrollTop = 0));
   }
 
-  // В пространстве убираем только связь; в общем списке удаляем заметку полностью.
-  protected removeNote(id: string): void {
-    const isCurrentNoteOpen = this.route.firstChild?.snapshot.paramMap.get('id') === id;
+  protected openCreateNoteDialog(): void {
+    const dialogRef = this.dialog.open<string>(CreateNoteDialogComponent, {
+      ariaLabelledBy: 'create-note-title',
+    });
 
+    dialogRef.closed.subscribe((title) => {
+      if (!title) return;
+
+      const spaceId = this.spaceId();
+
+      const id = this.library.createNote(title, spaceId);
+
+      if (spaceId) {
+        this.router.navigate(['/spaces', spaceId, 'notes', id]);
+      } else {
+        this.router.navigate(['/notes', id]);
+      }
+    });
+  }
+
+  // В пространстве убираем только связь; в общем списке удаляем заметку полностью.
+  protected openRemoveNoteDialog(note: Note): void {
     const spaceId = this.spaceId();
 
-    if (spaceId) {
-      this.library.removeNoteFromSpace(id, spaceId);
-    } else {
-      this.library.deleteNote(id);
-    }
+    const dialogRef = this.dialog.open<boolean, RemoveNoteDialogData>(RemoveNoteDialogComponent, {
+      data: {
+        title: note.title,
+        action: spaceId ? 'unlink' : 'delete',
+      },
+      ariaLabelledBy: 'remove-note-title',
+    });
 
-    if (isCurrentNoteOpen) {
+    dialogRef.closed.subscribe((confirmed) => {
+      if (!confirmed) return;
+
+      const isCurrentNoteOpen = this.route.firstChild?.snapshot.paramMap.get('id') === note.id;
+
       if (spaceId) {
-        this.router.navigate(['/spaces', spaceId]);
+        this.library.removeNoteFromSpace(note.id, spaceId);
       } else {
-        this.router.navigate(['/notes']);
+        this.library.deleteNote(note.id);
       }
-    }
+
+      if (isCurrentNoteOpen) {
+        if (spaceId) {
+          this.router.navigate(['/spaces', spaceId]);
+        } else {
+          this.router.navigate(['/notes']);
+        }
+      }
+    });
   }
 
   protected openDeleteSpaceDialog(space: Space): void {
@@ -147,26 +184,6 @@ export class NotesComponent {
       if (!result) return;
 
       this.library.updateSpace(space.id, result);
-    });
-  }
-
-  protected openCreateNoteDialog(): void {
-    const dialogRef = this.dialog.open<string>(CreateNoteDialogComponent, {
-      ariaLabelledBy: 'create-note-title',
-    });
-
-    dialogRef.closed.subscribe((title) => {
-      if (!title) return;
-
-      const spaceId = this.spaceId();
-
-      const id = this.library.createNote(title, spaceId);
-
-      if (spaceId) {
-        this.router.navigate(['/spaces', spaceId, 'notes', id]);
-      } else {
-        this.router.navigate(['/notes', id]);
-      }
     });
   }
 }
