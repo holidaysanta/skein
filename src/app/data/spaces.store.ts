@@ -61,6 +61,18 @@ export class SpacesStore {
     this._links.update((links) => [...links, { noteId, spaceId }]);
   }
 
+  setNoteSpaces(noteId: string, spaceIds: readonly string[]): void {
+    const newLinks = spaceIds.map((spaceId) => {
+      return {noteId, spaceId}
+    })
+
+    this._links.update((links) => {
+      const otherLinks = links.filter((link) => link.noteId !== noteId);
+
+      return[...otherLinks, ...newLinks]
+    })
+  }
+
   removeNoteLinks(noteId: string): void {
     this._links.update((links) => links.filter((link) => link.noteId !== noteId));
   }

@@ -1,12 +1,10 @@
 <div class="flex w-full max-w-sm flex-col gap-4">
   <h2 id="delete-space-title" class="dialog-title">Удалить пространство?</h2>
 
-  <p>
-    Пространство «<span class="font-medium wrap-break-word">{{ data.name }}</span
-    >» будет удалено.
+  <p class="text-sm leading-relaxed text-muted">
+    Заметки из «<span class="font-medium wrap-break-word text-fg">{{ data.name }}</span
+    >» останутся во «Всех заметках» и других пространствах.
   </p>
-
-  <p class="text-sm text-muted">Заметки сохранятся во «Всех заметках» и других пространствах.</p>
 
   <div class="dialog-actions">
     <button class="button button--secondary" type="button" (click)="cancel()">Отмена</button>

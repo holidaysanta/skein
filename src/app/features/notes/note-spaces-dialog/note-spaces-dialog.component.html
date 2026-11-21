@@ -1,0 +1,19 @@
+<form class="flex w-96 max-w-full flex-col gap-6" (submit)="$event.preventDefault(); submit()">
+  <header class="flex flex-col gap-2">
+    <h2 id="note-spaces-title" class="dialog-title">Выберите пространства</h2>
+
+    <p class="text-sm leading-relaxed wrap-break-word text-muted">
+      Для заметки «<span class="font-medium wrap-break-word text-fg">{{ data.title }}</span
+      >»
+    </p>
+  </header>
+
+  <app-space-picker [options]="spaceOptions()" [formControl]="spaceIdsControl" />
+
+  <div class="dialog-actions">
+    <button class="button button--secondary" type="button" (click)="cancel()">Отмена</button>
+    <button class="button button--primary" type="submit" [disabled]="isUnchanged()">
+      Сохранить
+    </button>
+  </div>
+</form>

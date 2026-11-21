@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateNoteDialogComponent } from './create-note-dialog.component';
-import { DialogRef } from '@angular/cdk/dialog';
+import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 
 describe('CreateNoteDialogComponent', () => {
   let component: CreateNoteDialogComponent;
@@ -10,7 +10,13 @@ describe('CreateNoteDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CreateNoteDialogComponent],
-      providers: [{ provide: DialogRef, useValue: { close: () => {} } }],
+      providers: [
+        { provide: DialogRef, useValue: { close: () => {} } },
+        {
+          provide: DIALOG_DATA,
+          useValue: { initialSpaceIds: [] },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CreateNoteDialogComponent);

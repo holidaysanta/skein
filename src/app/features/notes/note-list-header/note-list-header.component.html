@@ -1,0 +1,36 @@
+<div class="flex items-center gap-3 p-4">
+  <app-space-badge
+    class="shrink-0"
+    size="sm"
+    [icon]="space()?.icon ?? 'notebook-text'"
+    [color]="space()?.color ?? 'accent'"
+  />
+
+  <div class="min-w-0 flex-1">
+    <h2 class="truncate text-sm font-semibold">{{ space()?.name ?? 'Все заметки' }}</h2>
+    <p class="mt-1 text-xs text-muted select-none">
+      {{ noteCount() | i18nPlural: noteCountLabels }}
+    </p>
+  </div>
+
+  @if (space(); as currentSpace) {
+    <button
+      class="button button--secondary button--icon rounded-2xl"
+      type="button"
+      aria-label="Действия пространства"
+      [cdkMenuPosition]="menuPosition"
+      [cdkMenuTriggerFor]="spaceMenu"
+    >
+      <svg width="16" height="16" class="shrink-0" aria-hidden="true">
+        <use href="/icons.svg#ellipsis" />
+      </svg>
+    </button>
+
+    <ng-template #spaceMenu>
+      <app-space-actions-menu
+        (editRequested)="editRequested.emit(currentSpace)"
+        (deleteRequested)="deleteRequested.emit(currentSpace)"
+      />
+    </ng-template>
+  }
+</div>

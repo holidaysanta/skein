@@ -1,20 +1,44 @@
 <div
-  class="relative flex items-center gap-2 rounded-xl pl-6 pr-4 py-2.5 hover:bg-hover"
+  class="relative flex items-center gap-2 rounded-xl py-2.5 pr-4 pl-6 hover:bg-hover"
   routerLinkActive="bg-hover"
 >
   <a [routerLink]="note().id" class="min-w-0 flex-1">
     <h3 class="truncate">{{ note().title || 'Без заголовка' }}</h3>
-    <p class="truncate text-xs text-muted font-medium">
+    <p class="truncate text-xs font-medium text-muted">
       {{ (note().text | markdownToPlain) || 'Пустая заметка' }}
     </p>
   </a>
+
   <button
+    class="button button--icon text-muted hover:bg-hover hover:text-fg aria-expanded:bg-hover"
     type="button"
-    class="p-2 text-muted hover:text-fg"
-    (click)="removeRequested.emit()"
-    [attr.aria-label]="removeLabel()"
-    [title]="removeLabel()"
+    aria-label="Действия заметки"
+    [cdkMenuTriggerFor]="noteMenu"
   >
-    ✕
+    <svg width="16" height="16" class="shrink-0" aria-hidden="true">
+      <use href="/icons.svg#ellipsis" />
+    </svg>
   </button>
+
+  <ng-template #noteMenu>
+    <div cdkMenu class="menu" aria-label="Действия заметки">
+      <button
+        cdkMenuItem
+        type="button"
+        class="menu-item"
+        (cdkMenuItemTriggered)="spacesRequested.emit()"
+      >
+        Пространства
+      </button>
+
+      <button
+        cdkMenuItem
+        type="button"
+        class="menu-item menu-item--danger"
+        (cdkMenuItemTriggered)="removeRequested.emit()"
+      >
+        {{ removeLabel() }}
+      </button>
+    </div>
+  </ng-template>
 </div>

@@ -1,56 +1,11 @@
 <aside class="flex w-75 shrink-0 flex-col overflow-hidden rounded-2xl border border-line bg-panel">
-  @if (currentSpace(); as space) {
-    <div class="flex items-center gap-3 p-4">
-      <app-space-badge [icon]="space.icon" [color]="space.color" />
-
-      <div class="min-w-0 flex-1">
-        <h2 class="font-semibold wrap-break-word">{{ space.name }}</h2>
-        <p class="mt-1 text-sm text-muted select-none">
-          {{ noteCount() | i18nPlural: noteCountLabels }}
-        </p>
-      </div>
-
-      <button
-        class="button button--secondary button--icon rounded-full"
-        type="button"
-        aria-label="Действия пространства"
-        [cdkMenuPosition]="menuPosition"
-        [cdkMenuTriggerFor]="spaceMenu"
-      >
-        <svg width="16" height="16" class="shrink-0" aria-hidden="true">
-          <use href="/icons.svg#ellipsis" />
-        </svg>
-      </button>
-
-      <ng-template #spaceMenu>
-        <div cdkMenu aria-label="Действия пространства" class="menu">
-          <button
-            cdkMenuItem
-            type="button"
-            class="menu-item"
-            (cdkMenuItemTriggered)="openEditSpaceDialog(space)"
-          >
-            <svg width="16" height="16" class="shrink-0" aria-hidden="true">
-              <use href="/icons.svg#pencil" />
-            </svg>
-            Редактировать
-          </button>
-          <button
-            cdkMenuItem
-            type="button"
-            class="menu-item menu-item--danger"
-            (cdkMenuItemTriggered)="openDeleteSpaceDialog(space)"
-          >
-            <svg width="16" height="16" class="shrink-0" aria-hidden="true">
-              <use href="/icons.svg#trash" />
-            </svg>
-            Удалить
-          </button>
-        </div>
-      </ng-template>
-    </div>
-  } @else if (!spaceId()) {
-    <h2 class="p-4 font-semibold">Все заметки</h2>
+  @if (currentSpace() || !spaceId()) {
+    <app-note-list-header
+      [space]="currentSpace()"
+      [noteCount]="noteCount()"
+      (editRequested)="openEditSpaceDialog($event)"
+      (deleteRequested)="openDeleteSpaceDialog($event)"
+    />
   }
 
   <div class="p-4">
@@ -71,7 +26,8 @@
       <app-note-list-item
         [note]="note"
         [removeLabel]="spaceId() ? 'Убрать из пространства' : 'Удалить заметку'"
-        (removeRequested)="removeNote(note.id)"
+        (spacesRequested)="openNoteSpaceDialog(note)"
+        (removeRequested)="openRemoveNoteDialog(note)"
       />
     } @empty {
       <p class="p-3 text-center text-sm leading-relaxed text-balance text-muted select-none">

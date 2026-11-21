@@ -1,15 +1,48 @@
 @layer components {
   .app-dialog {
-    @apply bg-raised rounded-2xl border border-line p-6;
+    @apply rounded-2xl border border-line bg-raised p-6;
     @apply shadow-overlay;
     @apply overflow-y-auto;
   }
 
   .dialog-title {
-    @apply text-xl font-semibold;
+    @apply text-xl font-medium;
   }
 
   .dialog-actions {
     @apply flex flex-wrap justify-end gap-3;
+  }
+
+  @supports (interpolate-size: allow-keywords) {
+    @media (prefers-reduced-motion: no-preference) {
+      .dialog-disclosure {
+        interpolate-size: allow-keywords;
+      }
+
+      .dialog-disclosure::details-content {
+        height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition:
+          height 200ms ease-out,
+          opacity 200ms ease-out,
+          content-visibility 200ms allow-discrete;
+      }
+
+      .dialog-disclosure[open]::details-content {
+        height: auto;
+        opacity: 1;
+      }
+
+      .dialog-selection-preview {
+        interpolate-size: allow-keywords;
+        height: auto;
+        transition:
+          height 200ms ease-out,
+          opacity 200ms ease-out,
+          margin-top 200ms ease-out,
+          visibility 200ms;
+      }
+    }
   }
 }

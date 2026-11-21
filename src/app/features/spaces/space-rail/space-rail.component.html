@@ -1,4 +1,4 @@
-<nav class="flex flex-col items-center w-30 gap-4 p-2" aria-label="Пространства">
+<nav class="flex w-30 flex-col items-center gap-4 p-2" aria-label="Пространства">
   <a
     routerLink="/notes"
     routerLinkActive
@@ -9,7 +9,7 @@
     style="--space-color: var(--accent)"
     draggable="false"
   >
-    <svg width="24" height="24" aria-hidden="true">
+    <svg width="20" height="20" aria-hidden="true">
       <use href="/icons.svg#notebook-text" />
     </svg>
 
@@ -23,7 +23,7 @@
   }
 
   <button
-    class="button button--icon size-10.5 rounded-2xl border border-line/60 bg-transparent text-muted hover:bg-raised hover:text-fg hover:shadow-raised motion-safe:transition-[color,background-color,border-color,box-shadow,translate] duration-200 motion-safe:hover:-translate-y-0.5"
+    class="button button--icon size-10.5 rounded-2xl border border-line/60 bg-transparent text-muted duration-200 hover:bg-raised hover:text-fg hover:shadow-raised motion-safe:transition-[color,background-color,border-color,box-shadow,translate] motion-safe:hover:-translate-y-0.5"
     type="button"
     aria-label="Создать пространство"
     (click)="openCreateSpaceDialog()"

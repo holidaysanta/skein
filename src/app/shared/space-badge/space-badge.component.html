@@ -1,8 +1,9 @@
-<div
-  class="flex size-12 items-center justify-center rounded-2xl bg-(--space-color)/15 text-(--space-color) shadow-raised transition-colors duration-150 motion-reduce:transition-none"
+<span
+  class="flex items-center justify-center rounded-2xl bg-(--space-color)/15 text-(--space-color) shadow-raised transition-colors duration-150 motion-reduce:transition-none"
+  [class]="size() === 'sm' ? 'size-10' : 'size-12'"
   [style.--space-color]="colorValue()"
 >
-  <svg width="24" height="24" aria-hidden="true">
+  <svg [class]="size() === 'sm' ? 'size-5' : 'size-6'" aria-hidden="true">
     <use [attr.href]="'/icons.svg#' + icon()" />
   </svg>
-</div>
+</span>
