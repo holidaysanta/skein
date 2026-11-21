@@ -25,21 +25,25 @@
   }
 
   .form-input {
-    @apply h-12 min-w-0 w-full rounded-2xl border border-line bg-app px-3 text-fg;
+    @apply h-12 w-full min-w-0 rounded-2xl border border-line bg-app px-3 text-sm text-fg;
     @apply placeholder:text-muted;
     @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
     @apply disabled:cursor-not-allowed disabled:opacity-50;
   }
 
   .form-label {
-    @apply text-sm font-medium text-muted;
+    @apply text-xs font-normal text-muted;
   }
 
   .form-error {
-    @apply text-sm text-error;
+    @apply text-xs text-error;
   }
 
   .form-input[aria-invalid='true'] {
     @apply border-error;
+  }
+
+  .form-counter {
+    @apply text-xs font-normal text-muted tabular-nums;
   }
 }

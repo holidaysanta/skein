@@ -31,7 +31,6 @@ export interface SpaceFormDialogData {
 export class SpaceFormDialogComponent {
   private readonly dialogRef = inject<DialogRef<SpaceDraft>>(DialogRef);
   private readonly data = inject<SpaceFormDialogData | null>(DIALOG_DATA);
-
   private readonly formBuilder = inject(NonNullableFormBuilder);
 
   protected readonly nameMaxLength = SPACE_NAME_MAX_LENGTH;

@@ -19,6 +19,6 @@ export class DeleteSpaceDialogComponent {
   }
 
   protected cancel(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 }
