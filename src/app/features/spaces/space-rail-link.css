@@ -13,7 +13,7 @@
 
     @variant hover {
       .space-rail-label {
-        @apply bg-hover border-muted;
+        @apply border-muted bg-hover;
       }
     }
   }
@@ -28,7 +28,7 @@
 
   .space-rail-link[aria-current='page']::before {
     content: '';
-    @apply absolute -left-1.75 top-3 w-0.75 h-5;
+    @apply absolute top-3 -left-1.75 h-5 w-0.75;
     @apply rounded-full bg-(--space-color);
   }
 
@@ -37,10 +37,10 @@
   }
 
   .space-rail-label {
-    @apply absolute left-1/2 -bottom-1.5 -translate-x-1/2;
-    @apply w-max min-w-7.5 max-w-27 truncate;
+    @apply absolute -bottom-1.5 left-1/2 -translate-x-1/2;
+    @apply w-max max-w-27 min-w-7.5 truncate;
     @apply h-4.75 rounded-md border border-line/65 bg-raised px-1.5;
-    @apply text-[11.5px] leading-4.25 font-normal text-center text-fg;
+    @apply text-center text-[11.5px] leading-4.25 font-normal text-fg;
     @apply transition-colors duration-200 motion-reduce:transition-none;
   }
 

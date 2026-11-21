@@ -12,12 +12,12 @@ import { ROUTER_OUTLET_DATA } from '@angular/router';
 
     <div class="flex max-w-sm flex-col gap-1.5">
       @if (noteCount() === 0) {
-        <h2 class="text-xl font-semibold text-fg">Чтобы не искать потом</h2>
+        <h2 class="text-lg font-semibold text-fg">Чтобы не искать потом</h2>
         <p class="text-sm leading-relaxed text-muted">
           Сохраните мысль, полезный пример или объяснение, которое хочется запомнить
         </p>
       } @else {
-        <h2 class="text-xl font-semibold text-fg">Есть к чему вернуться</h2>
+        <h2 class="text-lg font-medium text-fg">Есть к чему вернуться</h2>
         <p class="text-sm leading-relaxed text-muted">
           Откройте заметку, чтобы вспомнить главное или добавить что-то новое
         </p>
@@ -27,7 +27,7 @@ import { ROUTER_OUTLET_DATA } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class:
-      'h-full flex flex-col items-center justify-center gap-3 px-6 py-10 text-center select-none',
+      'h-full flex flex-col items-center justify-center gap-2 px-6 py-10 text-center select-none',
   },
 })
 export class NotePlaceholderComponent {
