@@ -16,7 +16,11 @@ import { LibraryFacade } from '../../data/library.facade';
 import { Dialog } from '@angular/cdk/dialog';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { STANDARD_DROPDOWN_BELOW_POSITIONS } from '@angular/cdk/overlay';
-import { CreateNoteDialogComponent } from './create-note-dialog/create-note-dialog.component';
+import {
+  CreateNoteDialogComponent,
+  CreateNoteDialogData,
+  CreateNoteDialogResult,
+} from './create-note-dialog/create-note-dialog.component';
 import { SpacesStore } from '../../data/spaces.store';
 import { SpaceBadgeComponent } from '../../shared/space-badge/space-badge.component';
 import { Space, SpaceDraft } from '../../data/space.model';
@@ -105,18 +109,24 @@ export class NotesComponent {
   }
 
   protected openCreateNoteDialog(): void {
-    const dialogRef = this.dialog.open<string>(CreateNoteDialogComponent, {
-      ariaLabelledBy: 'create-note-title',
-    });
+    const spaceId = this.spaceId();
 
-    dialogRef.closed.subscribe((title) => {
-      if (!title) return;
+    const dialogRef = this.dialog.open<CreateNoteDialogResult, CreateNoteDialogData>(
+      CreateNoteDialogComponent,
+      {
+        data: {
+          initialSpaceIds: spaceId ? [spaceId] : [],
+        },
+        ariaLabelledBy: 'create-note-title',
+      }
+    );
 
-      const spaceId = this.spaceId();
+    dialogRef.closed.subscribe((result) => {
+      if (!result) return;
 
-      const id = this.library.createNote(title, spaceId);
+      const id = this.library.createNote(result.title, result.spaceIds);
 
-      if (spaceId) {
+      if (spaceId && result.spaceIds.includes(spaceId)) {
         this.router.navigate(['/spaces', spaceId, 'notes', id]);
       } else {
         this.router.navigate(['/notes', id]);

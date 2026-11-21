@@ -23,7 +23,11 @@ export class LibraryFacade {
     this.spacesStore.removeNoteFromSpace(noteId, spaceId);
   }
 
-  createNote(title: string, spaceId?: string): string {
+  addNoteToSpace(noteId: string, spaceId: string): void {
+    this.spacesStore.addNoteToSpace(noteId, spaceId);
+  }
+
+  createNote(title: string, spaceIds: readonly string[]): string {
     const id = crypto.randomUUID();
 
     this.notesStore.addNote({
@@ -32,8 +36,8 @@ export class LibraryFacade {
       text: '',
     });
 
-    if (spaceId) {
-      this.spacesStore.addNoteToSpace(id, spaceId);
+    for (const spaceId of spaceIds) {
+      this.addNoteToSpace(id, spaceId);
     }
 
     return id;
