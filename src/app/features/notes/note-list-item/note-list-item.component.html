@@ -8,15 +8,37 @@
       {{ (note().text | markdownToPlain) || 'Пустая заметка' }}
     </p>
   </a>
+
   <button
+    class="button button--icon text-muted hover:bg-hover hover:text-fg aria-expanded:bg-hover"
     type="button"
-    class="p-2 text-muted hover:text-fg"
-    (click)="removeRequested.emit()"
-    [attr.aria-label]="removeLabel()"
-    [title]="removeLabel()"
+    aria-label="Действия заметки"
+    [cdkMenuTriggerFor]="noteMenu"
   >
-    <svg width="16" height="16" aria-hidden="true">
-      <use href="/icons.svg#circle-minus" />
+    <svg width="16" height="16" class="shrink-0" aria-hidden="true">
+      <use href="/icons.svg#ellipsis" />
     </svg>
   </button>
+
+  <ng-template #noteMenu>
+    <div cdkMenu class="menu" aria-label="Действия заметки">
+      <button
+        cdkMenuItem
+        type="button"
+        class="menu-item"
+        (cdkMenuItemTriggered)="spacesRequested.emit()"
+      >
+        Пространства
+      </button>
+
+      <button
+        cdkMenuItem
+        type="button"
+        class="menu-item menu-item--danger"
+        (cdkMenuItemTriggered)="removeRequested.emit()"
+      >
+        {{ removeLabel() }}
+      </button>
+    </div>
+  </ng-template>
 </div>

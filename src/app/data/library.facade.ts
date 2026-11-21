@@ -39,6 +39,10 @@ export class LibraryFacade {
     return id;
   }
 
+  setNoteSpaces(noteId: string, spaceIds: readonly string[]): void {
+    this.spacesStore.setNoteSpaces(noteId, spaceIds)
+  }
+
   updateNote(id: string, changes: NoteChanges): void {
     this.notesStore.updateNote(id, changes);
   }

@@ -36,6 +36,12 @@ import {
 } from './remove-note-dialog/remove-note-dialog.component';
 import { Note } from '../../data/note.model';
 
+import {
+  NoteSpaceDialogData,
+  NoteSpaceDialogResult,
+  NoteSpacesDialogComponent,
+} from './note-spaces-dialog/note-spaces-dialog.component';
+
 @Component({
   selector: 'app-notes',
   imports: [
@@ -147,6 +153,37 @@ export class NotesComponent {
         } else {
           this.router.navigate(['/notes']);
         }
+      }
+    });
+  }
+
+  protected openNoteSpaceDialog(note: Note): void {
+    const initialSpaceIds = this.spaceStore
+      .links()
+      .filter((link) => link.noteId === note.id)
+      .map((link) => link.spaceId);
+
+    const dialogRef = this.dialog.open<NoteSpaceDialogResult, NoteSpaceDialogData>(
+      NoteSpacesDialogComponent,
+      {
+        data: {
+          title: note.title,
+          initialSpaceIds,
+        },
+        ariaLabelledBy: 'note-spaces-title',
+      }
+    );
+
+    dialogRef.closed.subscribe((result) => {
+      if (!result) return;
+
+      const spaceId = this.spaceId();
+      const isCurrentNoteOpen = this.route.firstChild?.snapshot.paramMap.get('id') === note.id;
+
+      this.library.setNoteSpaces(note.id, result.spaceIds);
+
+      if (spaceId && isCurrentNoteOpen && !result.spaceIds.includes(spaceId)) {
+        this.router.navigate(['/spaces', spaceId]);
       }
     });
   }
