@@ -6,7 +6,12 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "generate:icons": "node scripts/generate-icon-types.mjs",
+    "prestart": "npm run generate:icons",
+    "prebuild": "npm run generate:icons",
+    "prewatch": "npm run generate:icons",
+    "pretest": "npm run generate:icons"
   },
   "private": true,
   "dependencies": {
