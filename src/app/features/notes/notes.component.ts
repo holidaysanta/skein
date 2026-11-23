@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { NoteListItemComponent } from './note-list-item/note-list-item.component';
-import { ThemePickerComponent } from '../../shared/theme-picker/theme-picker.component';
 import { filter } from 'rxjs';
 import { LibraryFacade } from '../../data/library.facade';
 import { Dialog } from '@angular/cdk/dialog';
@@ -37,23 +36,23 @@ import {
   NoteSpaceDialogResult,
   NoteSpacesDialogComponent,
 } from './note-spaces-dialog/note-spaces-dialog.component';
-import { SpaceDialogsService } from '../spaces/space-dialogs.service';
 import { NoteListHeaderComponent } from './note-list-header/note-list-header.component';
+import { SpaceDialogsService } from '../spaces/space-dialogs.service';
 
 @Component({
   selector: 'app-notes',
-  imports: [RouterOutlet, NoteListItemComponent, ThemePickerComponent, NoteListHeaderComponent],
+  imports: [RouterOutlet, NoteListItemComponent, NoteListHeaderComponent],
   templateUrl: './notes.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'flex flex-1 min-w-0' },
+  host: { class: 'col-start-2 col-span-2 row-start-1 grid grid-cols-subgrid min-h-0 min-w-0' },
 })
 export class NotesComponent {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   private readonly dialog = inject(Dialog);
   private readonly library = inject(LibraryFacade);
-  private readonly spaceDialogs = inject(SpaceDialogsService);
   private readonly spaceStore = inject(SpacesStore);
+  private readonly spaceDialogs = inject(SpaceDialogsService);
 
   readonly spaceId = input<string>();
 

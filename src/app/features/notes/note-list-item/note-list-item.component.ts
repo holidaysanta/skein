@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
 import { Note } from '../../../data/note.model';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MarkdownToPlainPipe } from '../../../shared/markdown-to-plain/markdown-to-plain.pipe';
-import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
+import { CdkContextMenuTrigger, CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
+import { ACTION_MENU_POSITIONS } from '../../../shared/menu-position';
 
 @Component({
   selector: 'app-note-list-item',
@@ -11,6 +12,7 @@ import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
     RouterLinkActive,
     MarkdownToPlainPipe,
     CdkMenuTrigger,
+    CdkContextMenuTrigger,
     CdkMenu,
     CdkMenuItem,
   ],
@@ -22,4 +24,6 @@ export class NoteListItemComponent {
   readonly removeLabel = input.required<string>();
   readonly spacesRequested = output<void>();
   readonly removeRequested = output<void>();
+
+  protected readonly menuPosition = ACTION_MENU_POSITIONS;
 }

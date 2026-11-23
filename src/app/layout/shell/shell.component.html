@@ -1,2 +1,16 @@
-<app-space-rail />
+<div
+  aria-hidden="true"
+  class="pointer-events-none -z-10 col-span-2 col-start-1 row-start-1 rounded-3xl border border-line bg-panel"
+  style="
+    background-origin: border-box;
+    background-image: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--panel) 65%, var(--app)) var(--rail-width),
+      color-mix(in srgb, var(--app) 80%, var(--panel)) var(--rail-width),
+      var(--panel) calc(var(--rail-width) + 8px)
+    );
+  "
+></div>
+
+<app-space-rail class="col-start-1 row-start-1" />
 <router-outlet class="contents" />

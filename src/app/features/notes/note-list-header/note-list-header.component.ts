@@ -5,6 +5,7 @@ import { SpaceBadgeComponent } from '../../../shared/space-badge/space-badge.com
 import { CdkMenuTrigger } from '@angular/cdk/menu';
 import { STANDARD_DROPDOWN_BELOW_POSITIONS } from '@angular/cdk/overlay';
 import { SpaceActionsMenuComponent } from '../../spaces/space-actions-menu/space-actions-menu.component';
+import { ACTION_MENU_POSITIONS } from '../../../shared/menu-position';
 
 @Component({
   selector: 'app-note-list-header',
@@ -19,17 +20,12 @@ export class NoteListHeaderComponent {
   readonly editRequested = output<Space>();
   readonly deleteRequested = output<Space>();
 
+  protected readonly menuPosition = ACTION_MENU_POSITIONS;
+
   protected readonly noteCountLabels = {
     one: '# заметка',
     few: '# заметки',
     many: '# заметок',
     other: '# заметок',
   };
-
-  protected readonly menuPosition = STANDARD_DROPDOWN_BELOW_POSITIONS.map((position) => {
-    return {
-      ...position,
-      offsetY: position.overlayY === 'top' ? 8 : -8,
-    };
-  });
 }

@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ElementRef,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { SpacesStore } from '../../../data/spaces.store';
 import { SpaceRailItemComponent } from '../space-rail-item/space-rail-item.component';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
@@ -19,6 +28,28 @@ export class SpaceRailComponent {
   private readonly library = inject(LibraryFacade);
   protected readonly spacesStore = inject(SpacesStore);
   protected readonly dialog = inject(Dialog);
+  private readonly destroyRef = inject(DestroyRef);
+
+  private readonly spacesScroll = viewChild.required<ElementRef<HTMLDivElement>>('spacesScroll');
+  private readonly spacesEnd = viewChild.required<ElementRef<HTMLSpanElement>>('spacesEnd');
+
+  protected readonly hasMoreSpacesBelow = signal(false);
+
+  constructor() {
+    afterNextRender({
+      read: () => {
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            this.hasMoreSpacesBelow.set(!entry.isIntersecting);
+          },
+          { root: this.spacesScroll().nativeElement }
+        );
+
+        observer.observe(this.spacesEnd().nativeElement);
+        this.destroyRef.onDestroy(() => observer.disconnect());
+      },
+    });
+  }
 
   protected openCreateSpaceDialog() {
     const dialogRef = this.dialog.open<SpaceDraft>(SpaceFormDialogComponent, {

@@ -7,6 +7,9 @@ import { RouterOutlet } from '@angular/router';
   imports: [SpaceRailComponent, RouterOutlet],
   templateUrl: './shell.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'flex h-dvh p-3 gap-3' },
+  host: {
+    class:
+      'isolate grid h-dvh grid-cols-[var(--rail-width)_18.75rem_minmax(0,1fr)] grid-rows-[minmax(0,1fr)] p-3 [--rail-width:7.5rem]',
+  },
 })
 export class ShellComponent {}

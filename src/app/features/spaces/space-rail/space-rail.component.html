@@ -1,9 +1,12 @@
-<nav class="flex w-30 flex-col items-center gap-4 p-2" aria-label="Пространства">
+<nav
+  class="relative flex min-h-0 w-full flex-col items-center gap-2 px-2 pt-3 pb-3"
+  aria-label="Пространства"
+>
   <a
     routerLink="/notes"
     routerLinkActive
     ariaCurrentWhenActive="page"
-    class="space-rail-link"
+    class="space-rail-link shrink-0"
     title="Все заметки"
     aria-label="Все заметки"
     style="--space-color: var(--accent)"
@@ -16,20 +19,45 @@
     <span class="space-rail-label">Все</span>
   </a>
 
-  <hr class="w-6 rounded-full border-line" />
+  <div class="flex shrink-0 items-center gap-1">
+    <span class="h-px w-3 bg-line" aria-hidden="true"></span>
 
-  @for (space of spacesStore.spaces(); track space.id) {
-    <app-space-rail-item [space]="space" />
-  }
+    <button
+      class="button button--icon rounded-xl bg-transparent text-muted hover:bg-hover hover:text-fg"
+      type="button"
+      aria-label="Создать пространство"
+      title="Создать пространство"
+      (click)="openCreateSpaceDialog()"
+    >
+      <svg width="20" height="20" aria-hidden="true">
+        <use href="/icons.svg#plus" />
+      </svg>
+    </button>
 
-  <button
-    class="button button--icon size-10.5 rounded-2xl border border-line/60 bg-transparent text-muted duration-200 hover:bg-raised hover:text-fg hover:shadow-raised motion-safe:transition-[color,background-color,border-color,box-shadow,translate] motion-safe:hover:-translate-y-0.5"
-    type="button"
-    aria-label="Создать пространство"
-    (click)="openCreateSpaceDialog()"
+    <span class="h-px w-3 bg-line" aria-hidden="true"></span>
+  </div>
+
+  <div
+    #spacesScroll
+    class="space-rail-scroll min-h-0 w-full overflow-y-auto pt-2 pb-1"
+    [class.space-rail-scroll--has-more]="hasMoreSpacesBelow()"
   >
-    <svg width="24" height="24" aria-hidden="true">
-      <use href="/icons.svg#plus" />
+    <div class="flex flex-col items-center gap-3">
+      @for (space of spacesStore.spaces(); track space.id) {
+        <app-space-rail-item [space]="space" />
+      }
+    </div>
+
+    <span #spacesEnd class="block h-px" aria-hidden="true"></span>
+  </div>
+
+  <span
+    class="pointer-events-none absolute bottom-2 left-1/2 z-10 grid size-6 -translate-x-1/2 place-items-center rounded-full bg-raised text-fg/80"
+    [class.invisible]="!hasMoreSpacesBelow()"
+    aria-hidden="true"
+  >
+    <svg class="size-4">
+      <use href="/icons.svg#chevron-down" />
     </svg>
-  </button>
+  </span>
 </nav>

@@ -1,4 +1,4 @@
-<aside class="flex w-75 shrink-0 flex-col overflow-hidden rounded-2xl border border-line bg-panel">
+<aside class="flex flex-col overflow-hidden">
   @if (currentSpace() || !spaceId()) {
     <app-note-list-header
       [space]="currentSpace()"
@@ -8,10 +8,10 @@
     />
   }
 
-  <div class="p-4">
+  <div class="px-2 pt-1 pb-3">
     <button
       type="button"
-      class="button button--secondary w-full justify-start"
+      class="button button--secondary w-full justify-start text-muted hover:text-fg"
       (click)="openCreateNoteDialog()"
     >
       <svg width="16" height="16" [style.color]="spaceColorValue()" aria-hidden="true">
@@ -21,11 +21,14 @@
     </button>
   </div>
 
-  <nav class="flex flex-1 flex-col gap-2 overflow-y-auto px-2 pb-4">
+  <nav
+    class="flex flex-1 flex-col gap-1 overflow-y-auto px-2 pb-4"
+    [style.--space-color]="spaceColorValue()"
+  >
     @for (note of visibleNotes(); track note.id) {
       <app-note-list-item
         [note]="note"
-        [removeLabel]="spaceId() ? 'Убрать из пространства' : 'Удалить заметку'"
+        [removeLabel]="spaceId() ? 'Убрать' : 'Удалить'"
         (spacesRequested)="openNoteSpaceDialog(note)"
         (removeRequested)="openRemoveNoteDialog(note)"
       />
@@ -35,8 +38,6 @@
       </p>
     }
   </nav>
-
-  <app-theme-picker class="p-4" />
 </aside>
 
 <main #scrollContainer class="min-w-0 flex-1 overflow-y-auto">
