@@ -4,7 +4,7 @@
   <div class="flex flex-wrap gap-3">
     @for (color of colors; track color) {
       <label
-        class="inline-flex size-8 cursor-pointer items-center justify-center rounded-full bg-(--space-color) shadow-raised transition-[box-shadow,translate] duration-150 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-fg motion-safe:hover:-translate-y-0.25 motion-reduce:transition-none"
+        class="inline-flex size-8 cursor-pointer items-center justify-center rounded-full bg-(--space-color) shadow-raised transition-[box-shadow,translate] duration-150 [--focus-color:var(--space-fg)] has-focus-visible:focus-indicator motion-safe:hover:-translate-y-px motion-reduce:transition-none"
         [style.--space-color]="colorValues[color]"
       >
         <input
