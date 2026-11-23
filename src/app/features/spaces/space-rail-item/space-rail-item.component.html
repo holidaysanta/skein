@@ -7,10 +7,18 @@
   [title]="space().name"
   [attr.aria-label]="space().name"
   [style.--space-color]="colorValue()"
+  [cdkContextMenuTriggerFor]="spaceMenu"
 >
   <svg width="20" height="20" aria-hidden="true">
     <use [attr.href]="'/icons.svg#' + space().icon" />
   </svg>
 
   <span class="space-rail-label">{{ space().name }}</span>
+
+  <ng-template #spaceMenu>
+    <app-space-actions-menu
+      (editRequested)="openEditSpaceDialog(space())"
+      (deleteRequested)="openDeleteSpaceDialog(space())"
+    />
+  </ng-template>
 </a>

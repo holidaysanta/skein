@@ -20,15 +20,11 @@ import {
   CreateNoteDialogResult,
 } from './create-note-dialog/create-note-dialog.component';
 import { SpacesStore } from '../../data/spaces.store';
-import { Space, SpaceDraft } from '../../data/space.model';
+import { Space } from '../../data/space.model';
 import {
   DeleteSpaceDialogComponent,
   DeleteSpaceDialogData,
 } from '../spaces/delete-space-dialog/delete-space-dialog.component';
-import {
-  SpaceFormDialogComponent,
-  SpaceFormDialogData,
-} from '../spaces/space-form-dialog/space-form-dialog.component';
 import { SPACE_COLOR_VALUES } from '../../shared/space-colors';
 import {
   RemoveNoteDialogComponent,
@@ -41,6 +37,7 @@ import {
   NoteSpaceDialogResult,
   NoteSpacesDialogComponent,
 } from './note-spaces-dialog/note-spaces-dialog.component';
+import { SpaceDialogsService } from '../spaces/space-dialogs.service';
 import { NoteListHeaderComponent } from './note-list-header/note-list-header.component';
 
 @Component({
@@ -55,6 +52,7 @@ export class NotesComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly dialog = inject(Dialog);
   private readonly library = inject(LibraryFacade);
+  private readonly spaceDialogs = inject(SpaceDialogsService);
   private readonly spaceStore = inject(SpacesStore);
 
   readonly spaceId = input<string>();
@@ -176,38 +174,10 @@ export class NotesComponent {
   }
 
   protected openDeleteSpaceDialog(space: Space): void {
-    const dialogRef = this.dialog.open<boolean, DeleteSpaceDialogData>(DeleteSpaceDialogComponent, {
-      data: { name: space.name },
-      ariaLabelledBy: 'delete-space-title',
-    });
-
-    dialogRef.closed.subscribe((confirmed) => {
-      if (!confirmed) return;
-
-      this.library.deleteSpace(space.id);
-
-      if (this.spaceId() === space.id) {
-        this.router.navigate(['/notes']);
-      }
-    });
+    this.spaceDialogs.openDeleteSpaceDialog(space);
   }
 
   protected openEditSpaceDialog(space: Space): void {
-    const dialogRef = this.dialog.open<SpaceDraft, SpaceFormDialogData>(SpaceFormDialogComponent, {
-      data: {
-        space: {
-          name: space.name,
-          icon: space.icon,
-          color: space.color,
-        },
-      },
-      ariaLabelledBy: 'space-form-title',
-    });
-
-    dialogRef.closed.subscribe((result) => {
-      if (!result) return;
-
-      this.library.updateSpace(space.id, result);
-    });
+    this.spaceDialogs.openEditSpaceDialog(space);
   }
 }
