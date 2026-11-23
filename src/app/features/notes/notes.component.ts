@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { NoteListItemComponent } from './note-list-item/note-list-item.component';
-import { ThemePickerComponent } from '../../shared/theme-picker/theme-picker.component';
 import { filter } from 'rxjs';
 import { LibraryFacade } from '../../data/library.facade';
 import { Dialog } from '@angular/cdk/dialog';
@@ -20,15 +19,11 @@ import {
   CreateNoteDialogResult,
 } from './create-note-dialog/create-note-dialog.component';
 import { SpacesStore } from '../../data/spaces.store';
-import { Space, SpaceDraft } from '../../data/space.model';
+import { Space } from '../../data/space.model';
 import {
   DeleteSpaceDialogComponent,
   DeleteSpaceDialogData,
 } from '../spaces/delete-space-dialog/delete-space-dialog.component';
-import {
-  SpaceFormDialogComponent,
-  SpaceFormDialogData,
-} from '../spaces/space-form-dialog/space-form-dialog.component';
 import { SPACE_COLOR_VALUES } from '../../shared/space-colors';
 import {
   RemoveNoteDialogComponent,
@@ -42,13 +37,14 @@ import {
   NoteSpacesDialogComponent,
 } from './note-spaces-dialog/note-spaces-dialog.component';
 import { NoteListHeaderComponent } from './note-list-header/note-list-header.component';
+import { SpaceDialogsService } from '../spaces/space-dialogs.service';
 
 @Component({
   selector: 'app-notes',
-  imports: [RouterOutlet, NoteListItemComponent, ThemePickerComponent, NoteListHeaderComponent],
+  imports: [RouterOutlet, NoteListItemComponent, NoteListHeaderComponent],
   templateUrl: './notes.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'flex flex-1 min-w-0' },
+  host: { class: 'col-start-2 col-span-2 row-start-1 grid grid-cols-subgrid min-h-0 min-w-0' },
 })
 export class NotesComponent {
   private readonly router = inject(Router);
@@ -56,6 +52,7 @@ export class NotesComponent {
   private readonly dialog = inject(Dialog);
   private readonly library = inject(LibraryFacade);
   private readonly spaceStore = inject(SpacesStore);
+  private readonly spaceDialogs = inject(SpaceDialogsService);
 
   readonly spaceId = input<string>();
 
@@ -176,38 +173,10 @@ export class NotesComponent {
   }
 
   protected openDeleteSpaceDialog(space: Space): void {
-    const dialogRef = this.dialog.open<boolean, DeleteSpaceDialogData>(DeleteSpaceDialogComponent, {
-      data: { name: space.name },
-      ariaLabelledBy: 'delete-space-title',
-    });
-
-    dialogRef.closed.subscribe((confirmed) => {
-      if (!confirmed) return;
-
-      this.library.deleteSpace(space.id);
-
-      if (this.spaceId() === space.id) {
-        this.router.navigate(['/notes']);
-      }
-    });
+    this.spaceDialogs.openDeleteSpaceDialog(space);
   }
 
   protected openEditSpaceDialog(space: Space): void {
-    const dialogRef = this.dialog.open<SpaceDraft, SpaceFormDialogData>(SpaceFormDialogComponent, {
-      data: {
-        space: {
-          name: space.name,
-          icon: space.icon,
-          color: space.color,
-        },
-      },
-      ariaLabelledBy: 'space-form-title',
-    });
-
-    dialogRef.closed.subscribe((result) => {
-      if (!result) return;
-
-      this.library.updateSpace(space.id, result);
-    });
+    this.spaceDialogs.openEditSpaceDialog(space);
   }
 }

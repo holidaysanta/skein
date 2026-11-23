@@ -1,8 +1,32 @@
 @layer components {
+  @keyframes dialog-in {
+    from {
+      opacity: 0.55;
+      translate: 0 8px;
+      scale: 0.98;
+    }
+
+    35% {
+      opacity: 1;
+    }
+
+    72% {
+      translate: 0 -1px;
+      scale: 1.003;
+    }
+
+    to {
+      opacity: 1;
+      translate: 0 0;
+      scale: 1;
+    }
+  }
+
   .app-dialog {
     @apply rounded-2xl border border-line bg-raised p-6;
     @apply shadow-overlay;
     @apply overflow-y-auto;
+    @apply motion-safe:animate-[dialog-in_175ms_cubic-bezier(.2,.8,.25,1)];
   }
 
   .dialog-title {
@@ -44,5 +68,18 @@
           visibility 200ms;
       }
     }
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cdk-overlay-backdrop.app-dialog-backdrop {
+    transition-duration: 150ms;
+  }
+}
+
+@media (min-width: 768px) and (min-height: 720px) {
+  .app-dialog {
+    --dialog-lift: 16px;
+    margin-block-end: calc(2 * var(--dialog-lift));
   }
 }

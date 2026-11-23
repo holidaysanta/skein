@@ -21,7 +21,8 @@ export const appConfig: ApplicationConfig = {
       useValue: {
         ...new DialogConfig(),
         panelClass: 'app-dialog',
-        maxHeight: 'calc(100dvh - 2rem)',
+        backdropClass: ['cdk-overlay-dark-backdrop', 'app-dialog-backdrop'],
+        maxHeight: 'calc(100dvh - 2rem - 2 * var(--dialog-lift, 0px))',
         maxWidth: 'calc(100dvw - 2rem)',
       },
     },

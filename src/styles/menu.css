@@ -1,13 +1,37 @@
 @layer components {
+  @keyframes menu-in {
+    from {
+      opacity: 0.4;
+      translate: 0 -4px;
+      scale: 0.985;
+    }
+
+    25% {
+      opacity: 1;
+    }
+
+    65% {
+      translate: 0 1px;
+      scale: 1.005;
+    }
+
+    to {
+      opacity: 1;
+      translate: 0 0;
+      scale: 1;
+    }
+  }
+
   .menu {
-    @apply flex min-w-44 flex-col gap-1 rounded-2xl border border-line;
+    @apply flex min-w-40 flex-col gap-1 rounded-2xl border border-line;
     @apply bg-panel p-1.5 text-sm text-fg shadow-overlay;
+    @apply motion-safe:animate-[menu-in_145ms_ease-out_both];
   }
 
   .menu-item {
-    @apply flex min-h-9 cursor-pointer items-center gap-2 rounded-xl px-3 py-1.5 text-left;
+    @apply flex min-h-8 cursor-pointer items-center gap-2 rounded-xl px-3 py-1.5 text-left;
     @apply hover:bg-hover focus-visible:bg-hover;
-    @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+    @apply focus-visible:focus-indicator;
   }
 
   .menu-item--danger {

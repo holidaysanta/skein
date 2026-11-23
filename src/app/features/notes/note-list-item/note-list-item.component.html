@@ -1,18 +1,23 @@
 <div
-  class="relative flex items-center gap-2 rounded-xl py-2.5 pr-4 pl-6 hover:bg-hover"
-  routerLinkActive="bg-hover"
+  class="group/note relative rounded-xl before:pointer-events-none [&.is-active]:bg-(--space-color)/10 [&.is-active]:before:absolute [&.is-active]:before:top-1/2 [&.is-active]:before:left-1.5 [&.is-active]:before:h-5 [&.is-active]:before:w-0.5 [&.is-active]:before:-translate-y-1/2 [&.is-active]:before:rounded-full [&.is-active]:before:bg-(--space-color) [&:not(.is-active)]:hover:bg-hover"
+  routerLinkActive="is-active"
+  [cdkContextMenuTriggerFor]="noteMenu"
 >
-  <a [routerLink]="note().id" class="min-w-0 flex-1">
-    <h3 class="truncate">{{ note().title || 'Без заголовка' }}</h3>
-    <p class="truncate text-xs font-medium text-muted">
+  <a
+    [routerLink]="note().id"
+    class="block min-w-0 rounded-xl py-2 pr-11 pl-4 group-focus-within/note:pr-11 group-hover/note:pr-11 group-has-aria-expanded/note:pr-11 group-[.is-active]/note:pr-11 focus-visible:focus-indicator [@media(hover:hover)_and_(pointer:fine)]:pr-4"
+  >
+    <h3 class="truncate text-sm leading-5 font-medium">{{ note().title || 'Без заголовка' }}</h3>
+    <p class="truncate text-xs text-muted">
       {{ (note().text | markdownToPlain) || 'Пустая заметка' }}
     </p>
   </a>
 
   <button
-    class="button button--icon text-muted hover:bg-hover hover:text-fg aria-expanded:bg-hover"
+    class="button button--icon absolute top-1/2 right-1.5 size-8 min-h-8 -translate-y-1/2 rounded-lg text-muted group-focus-within/note:pointer-events-auto group-focus-within/note:opacity-100 group-hover/note:pointer-events-auto group-hover/note:opacity-100 group-[.is-active]/note:pointer-events-auto group-[.is-active]/note:opacity-100 hover:bg-hover hover:text-fg aria-expanded:pointer-events-auto aria-expanded:bg-hover aria-expanded:opacity-100 [@media(hover:hover)_and_(pointer:fine)]:pointer-events-none [@media(hover:hover)_and_(pointer:fine)]:opacity-0"
     type="button"
     aria-label="Действия заметки"
+    [cdkMenuPosition]="menuPosition"
     [cdkMenuTriggerFor]="noteMenu"
   >
     <svg width="16" height="16" class="shrink-0" aria-hidden="true">
@@ -28,6 +33,9 @@
         class="menu-item"
         (cdkMenuItemTriggered)="spacesRequested.emit()"
       >
+        <svg width="16" height="16" class="shrink-0" aria-hidden="true">
+          <use href="/icons.svg#layers" />
+        </svg>
         Пространства
       </button>
 
@@ -37,6 +45,10 @@
         class="menu-item menu-item--danger"
         (cdkMenuItemTriggered)="removeRequested.emit()"
       >
+        <svg width="16" height="16" class="shrink-0" aria-hidden="true">
+          <use href="/icons.svg#trash" />
+        </svg>
+
         {{ removeLabel() }}
       </button>
     </div>
